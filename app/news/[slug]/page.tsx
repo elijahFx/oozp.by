@@ -1,10 +1,18 @@
-"use client";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { notFound } from "next/navigation";
 
+interface Article {
+  title: string;
+  date: string;
+  content: string;
+}
+
+interface Articles {
+  [key: string]: Article;
+}
+
 // This would typically come from a database or CMS
-const articles = {
+const articles: Articles = {
   "supreme-court-ruling": {
     title: "Supreme Court Ruling Analysis",
     date: "2024-01-15",

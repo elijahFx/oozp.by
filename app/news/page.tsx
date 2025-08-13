@@ -51,7 +51,7 @@ const news = [
 ]
 
 export default function NewsPage() {
-  const categories = [...new Set(news.map(item => item.category))]
+  const categories = Array.from(new Set(news.map(item => item.category)))
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
