@@ -305,8 +305,8 @@ export default function PrivacyPolicyPage() {
             </p>
             <ul className="mt-4 space-y-2">
               <li><strong>Email:</strong> legal@oozp.by</li>
-              <li><strong>Телефон:</strong> +375 29 394 84 16</li>
-              <li><strong>Адрес:</strong> г. Минск, ул. Ленина, д. 1, офис 1</li>
+              <li><strong>Телефон:</strong> +375 29 606 25 98</li>
+              <li><strong>Адрес:</strong> 220004, г. Минск, ул. Амураторская, д. 4, каб. 209</li>
             </ul>
           </div>
         </div>

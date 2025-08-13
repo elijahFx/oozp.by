@@ -16,8 +16,8 @@ export default function Footer() {
               <div className="flex items-start space-x-2">
                 <Phone size={18} className="mt-0.5 text-muted-foreground" />
                 <div>
-                  <a href="tel:+375293948416" className="hover:text-primary transition-colors block">
-                    +375 29 394 84 16
+                  <a href="tel:+375296062598" className="hover:text-primary transition-colors block">
+                    +375 29 606 25 98
                   </a>
                   <span className="text-sm text-muted-foreground">(Telegram, Viber)</span>
                 </div>
@@ -25,10 +25,10 @@ export default function Footer() {
               <div className="flex items-start space-x-2">
                 <MessageCircle size={18} className="mt-0.5 text-muted-foreground" />
                 <div>
-                  <a href="https://t.me/+375293948416" className="hover:text-primary transition-colors block">
+                  <a href="https://t.me/+375296062598" className="hover:text-primary transition-colors block">
                     Telegram
                   </a>
-                  <a href="viber://chat?number=%2B375293948416" className="hover:text-primary transition-colors block">
+                  <a href="viber://chat?number=%2B375296062598" className="hover:text-primary transition-colors block">
                     Viber
                   </a>
                 </div>
@@ -36,7 +36,7 @@ export default function Footer() {
               <div className="flex items-start space-x-2">
                 <MapPin size={18} className="mt-0.5 text-muted-foreground" />
                 <address className="not-italic">
-                  г. Минск, ул. Ленина, д. 1, офис 1
+                  220004, г. Минск, ул. Амураторская, д. 4, каб. 209
                 </address>
               </div>
               <div className="flex items-start space-x-2">
@@ -87,7 +87,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-4">О нас</h3>
             <p className="text-muted-foreground">
-              Общественное объединение "Автопотребитель" защищает права потребителей автомобильных услуг. Мы оказываем юридическую помощь и консультации по защите прав потребителей.
+              Общественное объединение "Автопотребитель" защищает права потребителей во всех сферах потребительского рынка. Мы оказываем юридическую помощь и консультации по защите прав потребителей.
             </p>
           </div>
         </div>

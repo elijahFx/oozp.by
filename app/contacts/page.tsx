@@ -24,8 +24,8 @@ export default function ContactsPage() {
                     <div>
                       <h3 className="font-medium">Телефон</h3>
                       <p className="text-muted-foreground mt-1">
-                        <a href="tel:+375293948416" className="hover:text-primary transition-colors">
-                          +375 29 394 84 16
+                        <a href="tel:+375296062598" className="hover:text-primary transition-colors">
+                          +375 29 606 25 98
                         </a>
                       </p>
                     </div>
@@ -40,7 +40,7 @@ export default function ContactsPage() {
                     <div>
                       <h3 className="font-medium">Адрес</h3>
                       <p className="text-muted-foreground mt-1">
-                        г. Минск, ул. Ленина, д. 1, офис 1
+                        220004, г. Минск, ул. Амураторская, д. 4, каб. 209
                       </p>
                     </div>
                   </div>

@@ -56,16 +56,16 @@ export default function MobileNav({ navigation }: { navigation: { name: string, 
           
           <div className="mt-auto pt-6 border-t space-y-4">
             <a 
-              href="tel:+375293948416" 
+              href="tel:+375296062598" 
               className="flex items-center space-x-2 px-3 py-2 text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setOpen(false)}
             >
               <Phone size={18} />
-              <span>+375 29 394 84 16</span>
+              <span>+375 29 606 25 98</span>
             </a>
             <div className="px-3 space-y-2">
               <a 
-                href="https://t.me/+375293948416"
+                href="https://t.me/+375296062598"
                 className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setOpen(false)}
               >
@@ -73,7 +73,7 @@ export default function MobileNav({ navigation }: { navigation: { name: string, 
                 <span>Telegram</span>
               </a>
               <a 
-                href="viber://chat?number=%2B375293948416"
+                href="viber://chat?number=%2B375296062598"
                 className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setOpen(false)}
               >

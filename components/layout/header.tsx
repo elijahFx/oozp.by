@@ -80,11 +80,11 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex flex-col items-end">
               <a
-                href="tel:+375293948416"
+                href="tel:+375296062598"
                 className="flex items-center space-x-1 text-sm hover:text-primary transition-colors"
               >
                 <Phone size={16} />
-                <span>+375 29 394 84 16</span>
+                <span>+375 29 606 25 98</span>
               </a>
               <div className="flex items-center space-x-2 text-xs text-muted-foreground">
                 <MessageCircle size={14} />

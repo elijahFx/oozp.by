@@ -27,7 +27,7 @@ export default function Hero() {
                 <span className="block text-primary xl:inline">потребителей</span>
               </h1>
               <p className="mt-3 text-base text-muted-foreground sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
-                Защищаем ваши права в спорах с поставщиками услуг, застройщиками, банками, страховыми компаниями и продавцами. Ваша уверенность - наша работа.
+                Защищаем ваши права во всех сферах потребительского рынка. Ваша уверенность - наша работа.
               </p>
               <div className="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-4">
                 <Link href="/contacts" passHref>
