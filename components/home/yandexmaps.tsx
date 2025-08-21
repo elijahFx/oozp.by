@@ -1,13 +1,36 @@
-"use client";
-import { YMaps, Map, Placemark } from "react-yandex-maps";
-
 export default function YandexMap() {
+  const mapUrl =
+    "https://yandex.by/map-widget/v1/?um=constructor%3A6b04428a8075287f16ed6f8d&source=constructor";
 
+  // Функция для определения статуса работы
+  const getWorkStatus = () => {
+    const now = new Date();
+    const dayOfWeek = now.getDay(); // 0 - воскресенье, 1 - понедельник, ..., 6 - суббота
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const currentTime = hours + minutes / 60;
 
-  const defaultState = {
-    center: [53.910548, 27.529707], // Координаты ул. Амураторская 4, Минск
-    zoom: 17,
+    // Проверяем рабочие дни (пн-пт)
+    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+      // Полностью открыто: 9:00 - 19:00
+      if (currentTime >= 9 && currentTime < 19) {
+        return { status: "Открыто", color: "text-green-600" };
+      }
+      // За час до открытия: 8:00 - 9:00
+      else if (currentTime >= 8 && currentTime < 9) {
+        return { status: `До открытия 1 час`, color: "text-yellow-600" };
+      }
+      // За час до закрытия: 19:00 - 20:00
+      else if (currentTime >= 19 && currentTime < 20) {
+        return { status: `До закрытия 1 час`, color: "text-yellow-600" };
+      }
+    }
+
+    // Выходные или нерабочее время
+    return { status: "Закрыто", color: "text-gray-500" };
   };
+
+  const workStatus = getWorkStatus();
 
   return (
     <section className="relative w-full bg-muted/30">
@@ -26,17 +49,16 @@ export default function YandexMap() {
         {/* Информационный блок */}
         <div className="bg-white rounded-lg shadow-lg p-6 w-full lg:w-1/3">
           <h2 className="text-xl font-bold mb-2">
-            Общество защиты потребителей
+            Общество защиты потребителей "Автопотребитель"
           </h2>
           <p className="text-gray-600 mb-4">
             Защита прав потребителей во всех сферах потребительского рынка
           </p>
 
           <div className="flex items-center mb-4">
-            <span className="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded">
-              4.8 ★ (61 отзыв)
+            <span className={`${workStatus.color} text-sm font-medium px-2.5 py-0.5 rounded`}>
+              {workStatus.status}
             </span>
-            <span className="ml-2 text-gray-500">Закрыто до завтра</span>
           </div>
 
           <div className="space-y-2 mb-4">
@@ -81,7 +103,7 @@ export default function YandexMap() {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>Центр - 0.5 км</span>
+                <span>Молодежная - 690 м.</span>
               </li>
               <li className="flex items-center">
                 <svg
@@ -95,7 +117,21 @@ export default function YandexMap() {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>Площадь Победы - 1.2 км</span>
+                <span>Фрунзенская - 880 м.</span>
+              </li>
+              <li className="flex items-center">
+                <svg
+                  className="w-4 h-4 mr-2 text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>Юбилейная площадь - 1,12 км.</span>
               </li>
             </ul>
           </div>
@@ -112,29 +148,18 @@ export default function YandexMap() {
 
         {/* Карта */}
         <div className="w-full lg:w-2/3 h-[500px] rounded-lg overflow-hidden shadow-lg">
-          <YMaps query={{ apikey: "b758d8a7-6b04-428a-8075-287f16ed6f8d" }}>
-            <Map
-              defaultState={defaultState}
-              width="100%"
-              height="100%"
-              options={{
-                suppressMapOpenBlock: true,
-              }}
-              modules={["control.ZoomControl", "control.FullscreenControl"]}
-            >
-              <Placemark
-                geometry={defaultState.center}
-                properties={{
-                  iconContent: "Мы здесь!",
-                  hintContent: "Наш офис",
-                }}
-                options={{
-                  preset: "islands#blueStretchyIcon",
-                }}
-              />
-             
-            </Map>
-          </YMaps>
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3Acc80794c4492aa55af56daa6582678478fe18d029c58addfba20636bc3a1ea8a&amp;source=constructor"
+            width="100%"
+            height="100%"
+            loading="lazy"
+          ></iframe>
+          <div className="sr-only">
+            <h3>Местоположение офиса</h3>
+            <p>Общество защиты потребителей "Автопотребитель"</p>
+            <p>Адрес: 220004, г. Минск, ул. Амураторская, д. 4, каб. 209</p>
+            <p>Телефон: +375 29 606-25-98</p>
+          </div>
         </div>
       </div>
     </section>

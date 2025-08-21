@@ -1,11 +1,6 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Phone, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import MobileNav from "@/components/layout/mobile-nav";
 import logo from "../../imgs/logo.svg";
 import Image from 'next/image';
@@ -21,56 +16,31 @@ const navigation = [
 ];
 
 export default function Header() {
-  const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        isScrolled
-          ? "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b"
-          : "bg-transparent"
-      )}
-    >
+    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
               <Image
                 src={logo}
-                alt="Логотип"
+                alt="Логотип Общества защиты потребителей Автопотребитель"
                 width={55}
                 height={55}
-                className="object-contain cursor-pointer transition-all duration-400"
+                className="object-contain"
+                priority
               />
+              <span className="sr-only">Общество защиты потребителей Автопотребитель</span>
             </Link>
           </div>
 
-          <nav className="hidden md:ml-6 md:flex md:space-x-4">
+          <nav className="hidden md:ml-6 md:flex md:space-x-4" role="navigation" aria-label="Основная навигация">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={cn(
-                  "inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors",
-                  pathname === item.href
-                    ? "text-foreground border-b-2 border-primary"
-                    : "text-muted-foreground hover:text-foreground hover:border-b-2 hover:border-primary/40"
-                )}
+                prefetch={true}
+                className="inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors text-muted-foreground hover:text-foreground hover:border-b-2 hover:border-primary/40"
               >
                 {item.name}
               </Link>
@@ -82,6 +52,7 @@ export default function Header() {
               <a
                 href="tel:+375296062598"
                 className="flex items-center space-x-1 text-sm hover:text-primary transition-colors"
+                aria-label="Позвонить по телефону +375 29 606 25 98"
               >
                 <Phone size={16} />
                 <span>+375 29 606 25 98</span>

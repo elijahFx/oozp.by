@@ -1,19 +1,33 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Head from "next/head"; // Импортируем Head
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import TelegramWidget from "@/components/ui/telegram-widget";
 
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
+const inter = Inter({ 
+  subsets: ["latin", "cyrillic"],
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial']
+});
 
 export const metadata: Metadata = {
-  title: "Общество защиты потребителей",
+  title: "Общество защиты потребителей Автопотребитель | Защита прав потребителей в Беларуси",
   description:
-    "Защита прав потребителей в сфере услуг, строительства, банковского дела и торговли",
+    "Общественное объединение Автопотребитель - защита прав потребителей во всех сферах потребительского рынка в Беларуси. Бесплатные консультации, составление претензий, представление в суде.",
+  keywords: "защита прав потребителей, претензии, автопотребитель, юридическая помощь, Беларусь, Минск, потребительские споры",
+  authors: [{ name: "Общественное объединение Автопотребитель" }],
+  creator: "Общественное объединение Автопотребитель",
+  publisher: "Общественное объединение Автопотребитель",
+  robots: "index, follow",
+  openGraph: {
+    title: "Общество защиты потребителей Автопотребитель",
+    description: "Защита прав потребителей во всех сферах потребительского рынка в Беларуси",
+    type: "website",
+    locale: "ru_BY",
+    siteName: "Автопотребитель",
+  },
   icons: {
-    // Добавляем иконки в metadata
     icon: "./favicon/favicon.ico",
     apple: "./favicon/apple-touch-icon.png",
   },
@@ -26,21 +40,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <Head>
-        {" "}
-        {/* Добавляем Head для кастомных тегов */}
-        <link rel="icon" href="./favicon/favicon.ico" sizes="any" />
-        <link rel="icon" href="./favicon/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png" />
-        <link rel="manifest" href="./favicon/site.webmanifest" />
-        <meta name="theme-color" content="#ffffff" />
-      </Head>
+      <head>
+        <link rel="preconnect" href="https://images.pexels.com" />
+        <link rel="dns-prefetch" href="https://yandex.by" />
+      </head>
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
           <Header />
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow" role="main">
+            {children}
+          </main>
           <Footer />
-          <TelegramWidget />
         </div>
       </body>
     </html>

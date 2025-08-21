@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Critical CSS inlined */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -78,5 +92,11 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-display: swap;
+  }
+  
+  /* Optimize image loading */
+  img {
+    content-visibility: auto;
   }
 }

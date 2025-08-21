@@ -1,5 +1,3 @@
-"use client";
-
 import { Phone, MapPin, Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -19,6 +17,7 @@ export default function Footer() {
                   <a
                     href="tel:+375296062598"
                     className="hover:text-primary transition-colors block"
+                    aria-label="Позвонить по телефону +375 29 606 25 98"
                   >
                     +375 29 606 25 98
                   </a>
@@ -36,12 +35,14 @@ export default function Footer() {
                   <a
                     href="https://t.me/+375296062598"
                     className="hover:text-primary transition-colors block"
+                    aria-label="Написать в Telegram"
                   >
                     Telegram
                   </a>
                   <a
                     href="viber://chat?number=%2B375296062598"
                     className="hover:text-primary transition-colors block"
+                    aria-label="Написать в Viber"
                   >
                     Viber
                   </a>
@@ -58,6 +59,7 @@ export default function Footer() {
                 <a
                   href="mailto:legal@oozp.by"
                   className="hover:text-primary transition-colors"
+                  aria-label="Написать на email legal@oozp.by"
                 >
                   legal@oozp.by
                 </a>
@@ -67,56 +69,64 @@ export default function Footer() {
 
           <div>
             <h3 className="text-lg font-medium mb-4">Навигация</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/about"
-                  className="hover:text-primary transition-colors"
-                >
-                  О нас
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contacts"
-                  className="hover:text-primary transition-colors"
-                >
-                  Контакты
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/claim-samples"
-                  className="hover:text-primary transition-colors"
-                >
-                  Образцы претензий
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/appeal-procedure"
-                  className="hover:text-primary transition-colors"
-                >
-                  Порядок обращений
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/news"
-                  className="hover:text-primary transition-colors"
-                >
-                  Новости/Статьи
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/privacy-policy"
-                  className="hover:text-primary transition-colors"
-                >
-                  Политика обработки персональных данных
-                </Link>
-              </li>
-            </ul>
+            <nav role="navigation" aria-label="Навигация в подвале">
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="/about"
+                    className="hover:text-primary transition-colors"
+                    prefetch={true}
+                  >
+                    О нас
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contacts"
+                    className="hover:text-primary transition-colors"
+                    prefetch={true}
+                  >
+                    Контакты
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/claim-samples"
+                    className="hover:text-primary transition-colors"
+                    prefetch={true}
+                  >
+                    Образцы претензий
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/appeal-procedure"
+                    className="hover:text-primary transition-colors"
+                    prefetch={true}
+                  >
+                    Порядок обращений
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/news"
+                    className="hover:text-primary transition-colors"
+                    prefetch={true}
+                  >
+                    Новости/Статьи
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/privacy-policy"
+                    className="hover:text-primary transition-colors"
+                    prefetch={true}
+                  >
+                    Политика обработки персональных данных
+                  </Link>
+                </li>
+              </ul>
+            </nav>
           </div>
 
           <div>

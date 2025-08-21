@@ -10,7 +10,6 @@ interface Article {
 interface Articles {
   [key: string]: Article;
 }
-
 // This would typically come from a database or CMS
 const articles: Articles = {
   "supreme-court-ruling": {
@@ -45,17 +44,25 @@ const articles: Articles = {
   }
 };
 
-export function generateStaticParams() {
-  return Object.keys(articles).map((slug) => ({
-    slug: slug,
-  }));
+// Define params type
+type PageParams = {
+  slug: string;
+};
+
+// Explicit return type for generateStaticParams
+export function generateStaticParams(): Promise<PageParams[]> {
+  return Promise.resolve(
+    Object.keys(articles).map((slug) => ({ slug }))
+  );
 }
 
-export default function NewsArticle({
-  params,
-}: {
-  params: { slug: string };
-}) {
+// Component props with correct typing
+interface PageProps {
+  params: PageParams;
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default function NewsArticle({ params }: PageProps) {
   const article = articles[params.slug];
 
   if (!article) {

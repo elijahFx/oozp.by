@@ -1,56 +1,92 @@
-import Link from "next/link"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Download, FileText } from "lucide-react"
+import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Download, FileText } from "lucide-react";
 
 const claimSamples = [
   {
-    title: "Претензия на возврат автомобиля ненадлежащего качества",
-    description: "Претензия в автосалон с требованием возврата денежных средств за автомобиль с существенными недостатками",
-    filename: "pretenziya-vozvrat-avto.docx"
+    title: "Претензия по некачественному товару",
+    description: "Требование о возврате денежных средств за товар",
+    filename: "neck-tovar.docx",
   },
   {
-    title: "Претензия на некачественный ремонт автомобиля",
-    description: "Претензия в СТО с требованием безвозмездного устранения недостатков, возникших после ремонта",
-    filename: "pretenziya-nekachestvenniy-remont.docx"
+    title: "Претензия по некачественной работе (услуге)",
+    description: "Требование о возврате денежных средств за работу (услугу)",
+    filename: "neck-usl.docx",
   },
   {
-    title: "Претензия по гарантийному ремонту",
-    description: "Претензия дилеру с требованием выполнения гарантийных обязательств по ремонту автомобиля",
-    filename: "pretenziya-garantiyniy-remont.docx"
+    title: "Претензия о нарушении сроков выполнения работ",
+    description:
+      "Требование о расторжении договора с возвратом денежных средств",
+    filename: "sroki-usl.docx",
   },
   {
-    title: "Претензия на нарушение сроков поставки автомобиля",
-    description: "Претензия автосалону в связи с нарушением сроков поставки оплаченного автомобиля",
-    filename: "pretenziya-narushenie-srokov-postavki.docx"
+    title: "Претензия о нарушении сроков поставки товара",
+    description:
+      "Требование о возврате денежных средств за непоставленный товар",
+    filename: "sroki-tov.docx",
   },
   {
-    title: "Претензия на возмещение ущерба при ДТП",
-    description: "Претензия страховой компании с требованием полного возмещения ущерба по ОСАГО/КАСКО",
-    filename: "pretenziya-vozmeschenie-uscherba-dtp.docx"
+    title:
+      "Претензия об одностороннем отказе от выполнения работ (оказания услуг)",
+    description:
+      "Требование о возврате денежных средств в связи с отсутствием необходимости в выполнении работ (оказании услуг)",
+    filename: "otk-usl.docx",
   },
   {
-    title: "Претензия на компенсацию морального вреда",
-    description: "Дополнительное требование о компенсации морального вреда при нарушении прав потребителя",
-    filename: "pretenziya-moralniy-vred.docx"
-  }
-]
+    title: "Претензия о возврате качественного товара",
+    description:
+      "Требование о возврате денежных средств за товар надлежащего качества, не подошедший по характеристикам",
+    filename: "otk-tov.docx",
+  },
+];
 
 export default function ClaimSamplesPage() {
+  const handleDownload = (filename: string) => {
+    // Создаем ссылку на файл в папке public
+    const fileUrl = `/docs/${filename}`;
+
+    // Создаем временную ссылку для скачивания
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold tracking-tight mb-6">Образцы претензий</h1>
-        
+        <h1 className="text-4xl font-bold tracking-tight mb-6">
+          Образцы претензий
+        </h1>
+
         <div className="prose prose-lg dark:prose-invert max-w-none mb-10">
           <p>
-            На этой странице вы найдете образцы претензий, которые могут быть полезны при защите ваших прав как потребителя автомобильных услуг. Вы можете скачать эти образцы и использовать их как основу для составления собственной претензии.
+            На этой странице вы найдете образцы претензий, которые могут быть
+            полезны при защите ваших прав как потребителя автомобильных услуг.
+            Вы можете скачать эти образцы и использовать их как основу для
+            составления собственной претензии.
           </p>
           <p>
-            <strong>Внимание!</strong> Данные образцы носят общий характер. Для получения индивидуальной консультации и помощи в составлении претензии, пожалуйста, <Link href="/contacts" className="text-primary hover:underline">свяжитесь с нами</Link>.
+            <strong>Внимание!</strong> Данные образцы носят общий характер. Для
+            получения индивидуальной консультации и помощи в составлении
+            претензии, пожалуйста,{" "}
+            <Link href="/contacts" className="text-primary hover:underline">
+              свяжитесь с нами
+            </Link>
+            .
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {claimSamples.map((sample, index) => (
             <Card key={index} className="flex flex-col h-full">
@@ -66,19 +102,26 @@ export default function ClaimSamplesPage() {
                 </CardDescription>
               </CardContent>
               <CardFooter className="pt-4 mt-auto">
-                <Button variant="outline" className="w-full">
-                  <Download className="mr-2 h-4 w-4" />
-                  Скачать образец
-                </Button>
+                <Link href={`/docs/${sample.filename}`} passHref legacyBehavior>
+                  <Button variant="outline" className="w-full" asChild>
+                    <a download target="_blank" rel="noopener noreferrer">
+                      <Download className="mr-2 h-4 w-4" />
+                      Скачать образец
+                    </a>
+                  </Button>
+                </Link>
               </CardFooter>
             </Card>
           ))}
         </div>
-        
+
         <div className="mt-12 p-6 bg-muted rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Нужна персональная консультация?</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            Нужна персональная консультация?
+          </h2>
           <p className="text-muted-foreground mb-6">
-            Если вы не нашли подходящий образец или вам требуется индивидуальная помощь в составлении претензии, наши специалисты готовы помочь.
+            Если вы не нашли подходящий образец или вам требуется индивидуальная
+            помощь в составлении претензии, наши специалисты готовы помочь.
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <Link href="/contacts" passHref>
@@ -91,5 +134,5 @@ export default function ClaimSamplesPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
