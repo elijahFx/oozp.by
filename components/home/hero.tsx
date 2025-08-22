@@ -21,7 +21,7 @@ export default function Hero() {
 
           <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
             <div className="sm:text-center lg:text-left">
-              <span className="inline-block text-primary font-semibold tracking-wide uppercase mb-4">Общественное объединение "Автопотребитель"</span>
+              <span className="inline-block text-primary font-semibold tracking-wide uppercase mb-4">Общественное объединение по защите прав потребителей "Автопотребитель"</span>
               <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
                 <span className="block xl:inline">Общество защиты</span>{' '}
                 <span className="block text-primary xl:inline">потребителей</span>
@@ -50,7 +50,7 @@ export default function Hero() {
         <div className="relative h-56 w-full sm:h-72 md:h-96 lg:h-full">
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
           <Image
-            src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg"
+            src="/imgs/minsk.jpg"
             alt="Защита прав потребителей"
             fill
             className="object-cover"

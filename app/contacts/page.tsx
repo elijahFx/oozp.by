@@ -40,7 +40,7 @@ export default function ContactsPage() {
                     <div>
                       <h3 className="font-medium">Адрес</h3>
                       <p className="text-muted-foreground mt-1">
-                        220004, г. Минск, ул. Амураторская, д. 4, каб. 209
+                        220004, г. Минск, ул. Амураторская, д. 4, 2 этаж, каб. 209
                       </p>
                     </div>
                   </div>
@@ -70,8 +70,8 @@ export default function ContactsPage() {
                     <div>
                       <h3 className="font-medium">Время работы</h3>
                       <p className="text-muted-foreground mt-1">
-                        Понедельник - Пятница: 9:00 - 18:00<br />
-                        Суббота: 10:00 - 15:00<br />
+                        Понедельник - Пятница: 9:00 - 20:00<br />
+                        Суббота: выходной<br />
                         Воскресенье: выходной
                       </p>
                     </div>

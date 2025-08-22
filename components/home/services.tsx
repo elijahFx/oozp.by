@@ -5,10 +5,10 @@ import {
   HelpCircle,
   Home,
   Building2,
-  Banknote,
   ShieldCheck,
-  Store,
-  HeartPulse
+  ShoppingCart,
+  Car,
+  Monitor
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import Image from 'next/image'
@@ -18,37 +18,37 @@ const services = [
     title: 'Жилищно-коммунальные услуги',
     description: 'Помощь в разрешении споров с поставщиками коммунальных услуг и управляющими компаниями.',
     icon: Home,
-    image: 'https://images.pexels.com/photos/3958958/pexels-photo-3958958.jpeg'
+    image: '/imgs/zku.jpg'
   },
   {
     title: 'Долевое строительство',
     description: 'Защита прав дольщиков, споры с застройщиками, проверка документации.',
     icon: Building2,
-    image: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg'
-  },
-  {
-    title: 'Банковские услуги',
-    description: 'Разрешение споров с банками по кредитам, вкладам и другим финансовым продуктам.',
-    icon: Banknote,
-    image: 'https://images.pexels.com/photos/4386366/pexels-photo-4386366.jpeg'
+    image: '/imgs/dolevka.png'
   },
   {
     title: 'Страховые споры',
     description: 'Помощь в получении страховых выплат и разрешении споров со страховыми компаниями.',
     icon: ShieldCheck,
-    image: 'https://images.pexels.com/photos/7654586/pexels-photo-7654586.jpeg'
+    image: '/imgs/Unsandwich_Article-02.jpg'
   },
   {
-    title: 'Защита потребителей',
-    description: 'Споры по качеству товаров и услуг, возврат средств, компенсация ущерба.',
-    icon: Store,
-    image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg'
+    title: 'Споры с маркетплейсами',
+    description: 'Разрешение конфликтов с онлайн-площадками, возврат товаров, оспаривание блокировок аккаунтов.',
+    icon: ShoppingCart,
+    image: '/imgs/market.png'
   },
   {
-    title: 'Ветеринарные споры',
-    description: 'Разрешение конфликтов с ветеринарными клиниками и зоомагазинами.',
-    icon: HeartPulse,
-    image: 'https://images.pexels.com/photos/6235233/pexels-photo-6235233.jpeg'
+    title: 'Автомобили, СТО',
+    description: 'Споры по качеству ремонта, купли-продажи автомобилей, некачественному обслуживанию на станциях техобслуживания.',
+    icon: Car,
+    image: '/imgs/geely.jpg'
+  },
+  {
+    title: 'Электробытовые товары',
+    description: 'Возврат и обмен некачественной техники, гарантийные случаи, споры с магазинами электроники.',
+    icon: Monitor,
+    image: '/imgs/electro.jpg'
   }
 ]
 

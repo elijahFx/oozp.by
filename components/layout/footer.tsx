@@ -51,7 +51,7 @@ export default function Footer() {
               <div className="flex items-start space-x-2">
                 <MapPin size={18} className="mt-0.5 text-muted-foreground" />
                 <address className="not-italic">
-                  220004, г. Минск, ул. Амураторская, д. 4, каб. 209
+                  220004, г. Минск, ул. Амураторская, д. 4, 2 этаж, каб. 209
                 </address>
               </div>
               <div className="flex items-start space-x-2">
@@ -132,7 +132,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-4">О нас</h3>
             <p className="text-muted-foreground">
-              Общественное объединение "Автопотребитель" защищает права
+              Общественное объединение по защите прав потребителей "Автопотребитель" защищает права
               потребителей во всех сферах потребительского рынка. Мы оказываем
               юридическую помощь и консультации по защите прав потребителей.
             </p>
