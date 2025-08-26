@@ -79,11 +79,15 @@ export default function AppealProcedurePage() {
           <ul className="space-y-4 text-muted-foreground">
             <li className="flex items-start">
               <span className="mr-2 text-primary">•</span>
-              <span>Сроки исковой давности по защите прав потребителей составляют 3 года с момента обнаружения недостатка</span>
+              <span>В отдельных случаях претензионный порядок урегулирования спора является обязательным даже для потребителя</span>
+            </li>
+             <li className="flex items-start">
+              <span className="mr-2 text-primary">•</span>
+              <span>Общественные объединения потребителей обязаны оказывать помощь потребителями на безвозмездной основе (бесплатно)</span>
             </li>
             <li className="flex items-start">
               <span className="mr-2 text-primary">•</span>
-              <span>Потребители освобождены от уплаты государственной пошлины при подаче исков, если цена иска не превышает 1 000 000 рублей</span>
+              <span>Потребители освобождены от уплаты государственной пошлины при подаче исков и апелляционных жалоб</span>
             </li>
             <li className="flex items-start">
               <span className="mr-2 text-primary">•</span>
@@ -91,7 +95,7 @@ export default function AppealProcedurePage() {
             </li>
             <li className="flex items-start">
               <span className="mr-2 text-primary">•</span>
-              <span>В случае удовлетворения иска суд взыскивает с ответчика штраф в размере 50% от присужденной суммы за отказ добровольно удовлетворить требования потребителя</span>
+              <span>В случае удовлетворения иска суд взыскивает с ответчика штраф в размере 100% от присужденной суммы за отказ добровольно удовлетворить требования потребителя, из которых 90% от суммы уходит в пользу местного бюджета, а 10% в пользу общественноего объединения защиты потребителей</span>
             </li>
           </ul>
         </div>

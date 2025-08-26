@@ -187,7 +187,7 @@ export default function ClaimBuilderPage() {
       }, 100);
 
       // 4. Отправляем данные на сервер (если нужно)
-      const response = await fetch("http://localhost:5000/claims", {
+      const response = await fetch("https://apocrypha.su/claims", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

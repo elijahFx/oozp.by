@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  trailingSlash: true,
+  trailingSlash: false,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -20,10 +20,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true, // Игнорировать ошибки при сборке
   },
-  eslint: {
-    ignoreDuringBuilds: true, // Игнорировать ESLint (если используется)
-  },
   swcMinify: true,
+  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  basePath: '',
   modularizeImports: {
     "lucide-react": {
       transform: "lucide-react/dist/esm/icons/{{kebabCase member}}",

@@ -29,6 +29,20 @@ export default function Hero() {
               <p className="mt-3 text-base text-muted-foreground sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
                 Защищаем ваши права во всех сферах потребительского рынка. Ваша уверенность - наша работа.
               </p>
+              
+              {/* Телефон горячей линии */}
+              <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                <p className="text-sm text-muted-foreground mb-2">Телефон горячей линии:</p>
+                <a 
+                  href="tel:+375296062598" 
+                  className="text-2xl sm:text-3xl font-bold text-primary hover:text-primary/80 transition-colors"
+                  aria-label="Позвонить по телефону горячей линии +375 29 606 25 98"
+                >
+                  +375 29 606 25 98
+                </a>
+                <p className="text-xs text-muted-foreground mt-1">Telegram, Viber</p>
+              </div>
+              
               <div className="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-4">
                 <Link href="/contacts" passHref>
                   <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90">
@@ -50,7 +64,7 @@ export default function Hero() {
         <div className="relative h-56 w-full sm:h-72 md:h-96 lg:h-full">
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
           <Image
-            src="/imgs/minsk.jpg"
+            src="/imgs/minsk.webp"
             alt="Защита прав потребителей"
             fill
             className="object-cover"

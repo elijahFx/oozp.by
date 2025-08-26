@@ -18,37 +18,37 @@ const services = [
     title: 'Жилищно-коммунальные услуги',
     description: 'Помощь в разрешении споров с поставщиками коммунальных услуг и управляющими компаниями.',
     icon: Home,
-    image: '/imgs/zku.jpg'
+    image: '/imgs/zku.webp'
   },
   {
     title: 'Долевое строительство',
     description: 'Защита прав дольщиков, споры с застройщиками, проверка документации.',
     icon: Building2,
-    image: '/imgs/dolevka.png'
+    image: '/imgs/dolevka.webp'
   },
   {
     title: 'Страховые споры',
     description: 'Помощь в получении страховых выплат и разрешении споров со страховыми компаниями.',
     icon: ShieldCheck,
-    image: '/imgs/Unsandwich_Article-02.jpg'
+    image: '/imgs/Unsandwich_Article-02.webp'
   },
   {
     title: 'Споры с маркетплейсами',
     description: 'Разрешение конфликтов с онлайн-площадками, возврат товаров, оспаривание блокировок аккаунтов.',
     icon: ShoppingCart,
-    image: '/imgs/market.png'
+    image: '/imgs/market.webp'
   },
   {
     title: 'Автомобили, СТО',
     description: 'Споры по качеству ремонта, купли-продажи автомобилей, некачественному обслуживанию на станциях техобслуживания.',
     icon: Car,
-    image: '/imgs/geely.jpg'
+    image: '/imgs/geely.webp'
   },
   {
     title: 'Электробытовые товары',
     description: 'Возврат и обмен некачественной техники, гарантийные случаи, споры с магазинами электроники.',
     icon: Monitor,
-    image: '/imgs/electro.jpg'
+    image: '/imgs/electro.webp'
   }
 ]
 

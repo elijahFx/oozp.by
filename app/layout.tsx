@@ -28,8 +28,24 @@ export const metadata: Metadata = {
     siteName: "Автопотребитель",
   },
   icons: {
-    icon: "./favicon/favicon.ico",
-    apple: "./favicon/apple-touch-icon.png",
+    icon: [
+      { url: "/favicon/favicon.ico", sizes: "any" },
+      { url: "/favicon/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+    ],
+    apple: [
+      { 
+        url: "/favicon/apple-touch-icon.png", 
+        sizes: "180x180", 
+        type: "image/png" 
+      }
+    ],
+    other: [
+      {
+        rel: "manifest",
+        url: "/favicon/site.webmanifest"
+      }
+    ]
   },
 };
 
