@@ -21,7 +21,7 @@ export default function Hero() {
 
           <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
             <div className="sm:text-center lg:text-left">
-              <span className="inline-block text-primary font-semibold tracking-wide uppercase mb-4">Общественное объединение по защите прав потребителей "Автопотребитель"</span>
+              
               <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
                 <span className="block xl:inline">Общество защиты</span>{' '}
                 <span className="block text-primary xl:inline">потребителей</span>
