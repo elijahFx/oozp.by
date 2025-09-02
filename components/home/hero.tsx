@@ -1,7 +1,7 @@
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
+import HeroCarousel from "../carousel/HeroCarousel"
 
 export default function Hero() {
   return (
@@ -30,19 +30,27 @@ export default function Hero() {
                 Защищаем ваши права во всех сферах потребительского рынка. Ваша уверенность - наша работа.
               </p>
               
-              {/* Телефон горячей линии */}
+              {/* Телефон горячей линии и адрес */}
               <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
                 <p className="text-sm text-muted-foreground mb-2">Телефон горячей линии:</p>
                 <a 
                   href="tel:+375296062598" 
-                  className="text-2xl sm:text-3xl font-bold text-primary hover:text-primary/80 transition-colors"
+                  className="text-2xl sm:text-3xl font-bold text-primary hover:text-primary/80 transition-colors block"
                   aria-label="Позвонить по телефону горячей линии +375 29 606 25 98"
                 >
                   +375 29 606 25 98
                 </a>
-                <p className="text-xs text-muted-foreground mt-1">Telegram, Viber</p>
+                <p className="text-xs text-muted-foreground mt-1 mb-3">Telegram, Viber</p>
+                
+                {/* Адрес */}
+                <div className="border-t border-primary/10 pt-3">
+                  <p className="text-sm text-muted-foreground mb-1">Наш офис:</p>
+                  <address className="text-sm font-medium text-foreground not-italic">
+                    г. Минск, ул. Амураторская, д. 4, 2 этаж, каб. 209
+                  </address>
+                </div>
               </div>
-              
+        
               <div className="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-4">
                 <Link href="/contacts" passHref>
                   <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90">
@@ -60,20 +68,9 @@ export default function Hero() {
           </main>
         </div>
       </div>
-      <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-        <div className="relative h-56 w-full sm:h-72 md:h-96 lg:h-full">
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
-          <Image
-            src="/imgs/minsk.webp"
-            alt="Защита прав потребителей"
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, 50vw"
-            quality={85}
-          />
-        </div>
-      </div>
+      
+      {/* Вставляем клиентский компонент карусели */}
+      <HeroCarousel />
     </div>
   )
 }
