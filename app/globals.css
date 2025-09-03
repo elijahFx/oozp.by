@@ -119,4 +119,28 @@ html {
   .slide-in-from-top-2 {
     animation-name: slide-in-from-top;
   }
+  
+  /* Infinite scroll animation for testimonials */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+  
+  .animate-scroll {
+    animation: scroll 10s linear infinite;
+  }
+  
+  /* Pause animation on hover */
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
+  
+  /* Enhanced testimonials styling */
+  .testimonials-gradient {
+    background: linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--background)) 50%, hsl(var(--muted)) 100%);
+  }
 }

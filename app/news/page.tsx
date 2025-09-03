@@ -37,7 +37,7 @@ const news = [
     tags: ["wildberries", "маркетплейсы", "некачественный товар на Wildberries"],
     featured: true
   },
-  {
+  /*{
     id: "construction",
     title: "Что делать, если на пункте выдачи Вы получили бракованный, поврежденный или не соответствующий заказу товар на Wildberries?",
     description: "Подробное руководство по защите прав при покупке товара с недостатками на Wildberries",
@@ -45,7 +45,7 @@ const news = [
     category: "Долевое строительство",
     tags: ["долевое строительство", "некачественное строительство", "некачественная застройка"],
     featured: true
-  }
+  }*/
 ]
 
 export default function NewsPage() {
