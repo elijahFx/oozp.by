@@ -3,6 +3,19 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Контакты | Автопотребитель - свяжитесь с нами",
+  description: "Контактная информация общественного объединения по защите прав потребителей. Бесплатные консультации, юридическая помощь, защита прав потребителей в Беларуси.",
+  keywords: "контакты, защита прав потребителей, юридическая консультация, бесплатная помощь, Минск, Беларусь, контакты организации, запись на прием",
+  openGraph: {
+    title: "Контакты | Автопотребитель - защита прав потребителей",
+    description: "Свяжитесь с нами для получения бесплатной консультации по защите прав потребителей. Юридическая помощь в Минске и по всей Беларуси.",
+    type: "website",
+    locale: "ru_BY",
+  },
+};
 
 export default function ContactsPage() {
   return (

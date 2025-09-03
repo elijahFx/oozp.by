@@ -9,20 +9,20 @@ const heroImages = [
     alt: "Минск - защита прав потребителей"
   },
   {
-    src: "/imgs/zku.webp", 
-    alt: "ЖКУ - жилищно-коммунальные услуги"
+    src: "/imgs/minsk2.webp", 
+    alt: "Минск - защита прав потребителей"
   },
   {
-    src: "/imgs/dolevka.webp",
-    alt: "Долевое строительство"
+    src: "/imgs/minsk3.webp",
+    alt: "Минск - защита прав потребителей"
   },
   {
-    src: "/imgs/market.webp",
-    alt: "Споры с маркетплейсами"
+    src: "/imgs/minsk4.webp",
+    alt: "Минск - защита прав потребителей"
   },
   {
-    src: "/imgs/geely.webp",
-    alt: "Автомобили и СТО"
+    src: "/imgs/minsk5.webp",
+    alt: "Минск - защита прав потребителей"
   }
 ];
 

@@ -4,6 +4,19 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { CalendarIcon, ChevronRight, Tag } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Новости и статьи | Автопотребитель - полезные материалы",
+  description: "Актуальные новости и статьи по защите прав потребителей в Беларуси. Полезные руководства, советы юристов, изменения в законодательстве.",
+  keywords: "новости защиты прав потребителей, статьи о правах потребителей, юридические советы, потребительское право, законодательство РБ, полезные материалы",
+  openGraph: {
+    title: "Новости и статьи о защите прав потребителей | Автопотребитель",
+    description: "Актуальные материалы и руководства по защите прав потребителей в различных сферах. Советы юристов и экспертов.",
+    type: "website",
+    locale: "ru_BY",
+  },
+};
 
 const news = [
   {
@@ -22,6 +35,15 @@ const news = [
     date: "29.08.2025",
     category: "Маркетплейсы",
     tags: ["wildberries", "маркетплейсы", "некачественный товар на Wildberries"],
+    featured: true
+  },
+  {
+    id: "construction",
+    title: "Что делать, если на пункте выдачи Вы получили бракованный, поврежденный или не соответствующий заказу товар на Wildberries?",
+    description: "Подробное руководство по защите прав при покупке товара с недостатками на Wildberries",
+    date: "03.09.2025",
+    category: "Долевое строительство",
+    tags: ["долевое строительство", "некачественное строительство", "некачественная застройка"],
     featured: true
   }
 ]

@@ -6,7 +6,7 @@ import ScrollToTopButton from "@/components/scroll/ScrollToTopButton";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-
+import { Metadata } from "next";
 
 interface Article {
   title: string;

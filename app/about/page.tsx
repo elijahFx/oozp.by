@@ -1,5 +1,18 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Briefcase, Users, Shield, Award } from "lucide-react"
+import { Metadata } from "next";
+import { Card, CardContent } from "@/components/ui/card";
+import { Briefcase, Users, Shield, Award } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "О нас | Автопотребитель - защита прав потребителей в Беларуси",
+  description: "Общественное объединение по защите прав потребителей Автопотребитель. Бесплатные консультации, помощь в разрешении споров, защита прав потребителей в Беларуси.",
+  keywords: "защита прав потребителей, Беларусь, потребительский рынок, юридическая помощь, консультация, некачественные товары, услуги, судебные споры",
+  openGraph: {
+    title: "О нас | Автопотребитель - защита прав потребителей",
+    description: "Общественное объединение по защите прав потребителей в Беларуси. Наша миссия, принципы работы и история организации.",
+    type: "website",
+    locale: "ru_BY",
+  },
+};
 
 export default function AboutPage() {
   return (
