@@ -40,9 +40,8 @@ export default function HeroCarousel() {
   }, []);
 
   return (
-    <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-      <div className="relative h-56 w-full sm:h-72 md:h-96 lg:h-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
+    <div className="absolute inset-0 w-full h-full">
+      <div className="relative w-full h-full overflow-hidden">
         
         {heroImages.map((image, index) => (
           <div
@@ -57,24 +56,24 @@ export default function HeroCarousel() {
               src={image.src}
               alt={image.alt}
               fill
-              className="object-cover"
+              className="object-cover w-full h-full"
               priority={index === 0}
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="100vw"
               quality={85}
             />
           </div>
         ))}
         
         {/* Image indicators */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+        <div className="absolute bottom-8 right-8 z-20 flex space-x-2">
           {heroImages.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentImageIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentImageIndex 
-                  ? 'bg-white scale-125' 
-                  : 'bg-white/50 hover:bg-white/75'
+                  ? 'bg-white scale-125 shadow-lg' 
+                  : 'bg-white/60 hover:bg-white/80'
               }`}
               aria-label={`Показать изображение ${index + 1}`}
             />

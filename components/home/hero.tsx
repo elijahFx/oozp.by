@@ -5,72 +5,59 @@ import HeroCarousel from "../carousel/HeroCarousel"
 
 export default function Hero() {
   return (
-    <div className="relative overflow-hidden bg-background">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-primary/10 to-transparent pointer-events-none" />
-      <div className="mx-auto max-w-7xl">
-        <div className="relative z-10 bg-background/80 backdrop-blur-sm pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
-          <svg
-            className="absolute inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform text-background lg:block"
-            fill="currentColor"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <polygon points="50,0 100,0 50,100 0,100" />
-          </svg>
-
-          <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-            <div className="sm:text-center lg:text-left">
+    <div className="relative overflow-hidden bg-background min-h-screen">
+      {/* Фоновая карусель на всю ширину */}
+      <HeroCarousel />
+      
+      {/* Контент поверх изображения */}
+      <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+              <span className="block">Общество защиты</span>
+              <span className="block text-primary">потребителей</span>
+            </h1>
+            <p className="mt-6 text-lg text-muted-foreground sm:text-xl max-w-xl">
+              Защищаем ваши права во всех сферах потребительского рынка. Ваша уверенность - наша работа.
+            </p>
+            
+            {/* Телефон горячей линии и адрес */}
+            <div className="mt-8 p-6 bg-background/90 backdrop-blur-sm border border-primary/20 rounded-xl shadow-lg">
+              <p className="text-sm text-muted-foreground mb-2">Телефон горячей линии:</p>
+              <a 
+                href="tel:+375296062598" 
+                className="text-2xl sm:text-3xl font-bold text-primary hover:text-primary/80 transition-colors block"
+                aria-label="Позвонить по телефону горячей линии +375 29 606 25 98"
+              >
+                +375 29 606 25 98
+              </a>
+              <p className="text-xs text-muted-foreground mt-1 mb-4">Telegram, Viber</p>
               
-              <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-                <span className="block xl:inline">Общество защиты</span>{' '}
-                <span className="block text-primary xl:inline">потребителей</span>
-              </h1>
-              <p className="mt-3 text-base text-muted-foreground sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
-                Защищаем ваши права во всех сферах потребительского рынка. Ваша уверенность - наша работа.
-              </p>
-              
-              {/* Телефон горячей линии и адрес */}
-              <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                <p className="text-sm text-muted-foreground mb-2">Телефон горячей линии:</p>
-                <a 
-                  href="tel:+375296062598" 
-                  className="text-2xl sm:text-3xl font-bold text-primary hover:text-primary/80 transition-colors block"
-                  aria-label="Позвонить по телефону горячей линии +375 29 606 25 98"
-                >
-                  +375 29 606 25 98
-                </a>
-                <p className="text-xs text-muted-foreground mt-1 mb-3">Telegram, Viber</p>
-                
-                {/* Адрес */}
-                <div className="border-t border-primary/10 pt-3">
-                  <p className="text-sm text-muted-foreground mb-1">Наш офис:</p>
-                  <address className="text-sm font-medium text-foreground not-italic">
-                    г. Минск, ул. Амураторская, д. 4, 2 этаж, каб. 209
-                  </address>
-                </div>
-              </div>
-        
-              <div className="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-4">
-                <Link href="/contacts" passHref>
-                  <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90">
-                    Получить консультацию
-                  </Button>
-                </Link>
-                <Link href="/about" passHref>
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto mt-3 sm:mt-0">
-                    Узнать больше
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
+              {/* Адрес */}
+              <div className="border-t border-primary/10 pt-4">
+                <p className="text-sm text-muted-foreground mb-1">Наш офис:</p>
+                <address className="text-sm font-medium text-foreground not-italic">
+                  г. Минск, ул. Амураторская, д. 4, 2 этаж, каб. 209
+                </address>
               </div>
             </div>
-          </main>
+      
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <Link href="/contacts" passHref>
+                <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 shadow-lg">
+                  Получить консультацию
+                </Button>
+              </Link>
+              <Link href="/about" passHref>
+                <Button variant="outline" size="lg" className="w-full sm:w-auto bg-background/80 backdrop-blur-sm hover:bg-background/90">
+                  Узнать больше
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-      
-      {/* Вставляем клиентский компонент карусели */}
-      <HeroCarousel />
     </div>
   )
 }
