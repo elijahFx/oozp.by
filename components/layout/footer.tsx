@@ -100,6 +100,15 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
+                    href="/legal-documents"
+                    className="hover:text-primary transition-colors"
+                    prefetch={true}
+                  >
+                    Правовые акты
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/appeal-procedure"
                     className="hover:text-primary transition-colors"
                     prefetch={true}

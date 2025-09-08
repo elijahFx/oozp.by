@@ -11,6 +11,7 @@ const navigation = [
   { name: "Контакты", href: "/contacts" },
   { name: "Образцы претензий", href: "/claim-samples" },
   { name: "Конструктор претензий", href: "/claim-builder" },
+  { name: "Правовые акты", href: "/legal-documents" },
   { name: "Порядок обращений", href: "/appeal-procedure" },
   { name: "Новости/Статьи", href: "/news" },
 ];

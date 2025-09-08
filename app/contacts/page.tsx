@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { Metadata } from "next"
+import ContactForm from "@/components/oozpappeals/ContactForm"
 
 export const metadata: Metadata = {
   title: "Контакты | Автопотребитель - свяжитесь с нами",
@@ -102,7 +103,10 @@ export default function ContactsPage() {
                   Заполните форму и мы свяжемся с вами в ближайшее время
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+
+
+              <ContactForm />
+            {/*   <CardContent>
                 <form className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
@@ -143,6 +147,8 @@ export default function ContactsPage() {
                   <Button type="submit" className="w-full">Отправить</Button>
                 </form>
               </CardContent>
+
+              */}
             </Card>
           </div>
         </div>
