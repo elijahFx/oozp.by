@@ -172,7 +172,7 @@ async function LegalDocumentContent({ id }: { id: string }) {
             <div className="flex items-center gap-2">
               <FileText className="h-4 w-4 text-muted-foreground" />
               <div>
-                <p className="text-sm text-muted-foreground">Создан</p>
+                <p className="text-sm text-muted-foreground">Опубликован</p>
                 <p className="font-medium">{document.createdAt}</p>
               </div>
             </div>
@@ -229,6 +229,7 @@ async function LegalDocumentContent({ id }: { id: string }) {
               </Card>
             ) : (
               document.amendments
+                .reverse()
                 .map((amendment) => (
                   <Card key={amendment.id}>
                     <CardHeader className="pb-3">

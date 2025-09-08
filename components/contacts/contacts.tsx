@@ -3,7 +3,7 @@ import { Phone } from 'lucide-react'
 
 function Contacts() {
   return (
-    <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
+    <div className="mt-2 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
   <h3 className="text-xl font-semibold text-gray-900 mb-4">
     Нужна помощь специалиста?
   </h3>

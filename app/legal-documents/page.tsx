@@ -53,8 +53,6 @@ const getStatusBadge = (status: string) => {
 
 async function LegalDocumentsList() {
   const documents = await fetchLegalDocuments();
-
-  console.log(documents);
   
 
   const documentsByType = documents.reduce((acc, doc) => {

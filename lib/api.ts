@@ -1,13 +1,21 @@
 export interface Article {
-  id: string;
-  title: string;
-  description: string;
-  content: string;
-  date: string;
+  id?: string;
+  number?: number;
+  title?: string;
+  description?: string;
+  content?: string;
+  createdAt?: string;
+  updatedAt?: string;
   category: string;
   tags: string[];
+  likes?: number;
+  img?: string;
+  url?: string;
+  user_id?: string;
   featured?: boolean;
   imgPath?: string;
+  // Computed fields for backward compatibility
+  date?: string;
 }
 
 export interface ApiResponse {
@@ -20,7 +28,7 @@ const API_BASE_URL = 'https://apocrypha.su';
 
 export async function fetchArticles(): Promise<Article[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/article`, {
+    const response = await fetch(`${API_BASE_URL}/articles`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -35,12 +43,10 @@ export async function fetchArticles(): Promise<Article[]> {
     }
 
     const result: ApiResponse = await response.json();
-    
-    if (!result.success) {
-      throw new Error(result.error || 'Failed to fetch articles');
-    }
 
-    return result.data || [];
+    // Transform API response to match our interface
+    const articles = Array.isArray(result) ? result : (result.data || []);
+    return articles.map(transformArticle);
   } catch (error) {
     console.error('Error fetching articles:', error);
     
@@ -51,7 +57,7 @@ export async function fetchArticles(): Promise<Article[]> {
 
 export async function fetchArticleById(id: string): Promise<Article | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/article/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/articles/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -67,14 +73,69 @@ export async function fetchArticleById(id: string): Promise<Article | null> {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const result = await response.json();
-    return result.data || null;
+    const article = await response.json();
+    return article ? transformArticle(article) : null;
   } catch (error) {
     console.error(`Error fetching article ${id}:`, error);
     
     // Return fallback article if API fails
     return getFallbackArticleById(id);
   }
+}
+
+// Transform API article to match our interface
+function transformArticle(apiArticle: any): Article {
+  // Parse tags if they're a string
+  let tags: string[] = [];
+  if (typeof apiArticle.tags === 'string') {
+    try {
+      tags = JSON.parse(apiArticle.tags);
+    } catch {
+      tags = apiArticle.tags.split(',').map((tag: string) => tag.trim());
+    }
+  } else if (Array.isArray(apiArticle.tags)) {
+    tags = apiArticle.tags;
+  }
+
+  return {
+    id: apiArticle.id,
+    number: apiArticle.number,
+    title: apiArticle.title,
+    description: generateDescription(apiArticle.content),
+    content: apiArticle.content,
+    createdAt: apiArticle.createdAt,
+    updatedAt: apiArticle.updatedAt,
+    category: apiArticle.category || 'Общее',
+    tags: tags,
+    likes: apiArticle.likes,
+    img: apiArticle.img,
+    url: apiArticle.url,
+    user_id: apiArticle.user_id,
+    // Backward compatibility
+    date: apiArticle.createdAt,
+    imgPath: apiArticle.img,
+    featured: apiArticle.likes && apiArticle.likes > 10
+  };
+}
+
+// Generate description from content
+function generateDescription(content: string): string {
+  if (!content) return '';
+  
+  // Remove markdown formatting and get first paragraph
+  const plainText = content
+    .replace(/#{1,6}\s+/g, '') // Remove headers
+    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
+    .replace(/\*(.*?)\*/g, '$1') // Remove italic
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Remove links
+    .replace(/`(.*?)`/g, '$1') // Remove code
+    .trim();
+  
+  // Get first paragraph or first 200 characters
+  const firstParagraph = plainText.split('\n')[0];
+  return firstParagraph.length > 200 
+    ? firstParagraph.substring(0, 200) + '...'
+    : firstParagraph;
 }
 
 // Fallback articles in case API is unavailable

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { fetchArticles } from '../lib/api';
+import { fetchArticles } from '../../lib/api';
 
 export async function GET(request: NextRequest) {
   try {

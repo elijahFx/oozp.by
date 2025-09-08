@@ -2,79 +2,63 @@ import Link from "next/link"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { CalendarIcon, ChevronRight } from "lucide-react"
+import { fetchArticles } from "@/lib/api"
 
-const recentArticles = [
-  {
-    id: "apartment-flooding-guide",
-    title: "Порядок действий при залитии квартиры: как защитить свои права",
-    description: "Подробное руководство по защите прав при затоплении квартиры: от первоочередных действий до получения компенсации.",
-    date: "29.08.2025",
-    category: "ЖКУ"
-  },
-   {
-    id: "wildberries",
-    title: "Что делать, если на пункте выдачи Вы получили бракованный, поврежденный или не соответствующий заказу товар на Wildberries?",
-    description: "Подробное руководство по защите прав при покупке товара с недостатками на Wildberries",
-    date: "29.08.2025",
-    category: "Маркетплейсы"
-  },
-   {
-    id: "construction",
-    title: "Защита прав потребителей в Республике Беларусь при обнаружении недостатков в объекте долевого строительства",
-    description: "Долевое строительство в Беларуси остается популярным способом приобретения жилья, однако эта сфера сопряжена с определенными рисками. В данной статье рассматриваются актуальные механизмы защиты прав потребителей при обнаружении недостатков в объектах долевого строительства",
-    date: "05.09.2025",
-    category: "Долевое строительство",
-    tags: ["долевое строительство", "некачественное строительство", "некачественная застройка"],
-    featured: true
-  }
-]
+async function RecentArticlesList() {
+  const articles = await fetchArticles();
+  const recentArticles = articles.slice(0, 3); // Get first 3 articles
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      {recentArticles.map((article) => (
+        <Card key={article.id} className="hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+          <CardHeader className="flex-1">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
+                {article.category}
+              </span>
+              <div className="flex items-center text-sm text-muted-foreground">
+                <CalendarIcon className="mr-1 h-4 w-4" />
+                {article.createdAt}
+              </div>
+            </div>
+            <CardTitle className="text-xl line-clamp-2 mb-3">{article.title}</CardTitle>
+            <CardDescription className="line-clamp-3">
+              {article.description}
+            </CardDescription>
+          </CardHeader>
+          <CardFooter>
+            <Link href={`/news/${article.url || article.id}`} className="w-full">
+              <Button variant="outline" className="w-full group">
+                Читать статью
+                <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </CardFooter>
+        </Card>
+      ))}
+    </div>
+  );
+}
 
 export default function RecentNews() {
   return (
-    <section className="py-12">
+    <section className="py-12 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <div className="text-center mb-10">
           <h2 className="text-3xl font-bold tracking-tight mb-4">Новости и статьи</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Полезные статьи и актуальные новости в сфере защиты прав потребителей
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {recentArticles.map((article) => (
-            <Card key={article.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
-                    {article.category}
-                  </span>
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <CalendarIcon className="mr-1 h-4 w-4" />
-                    {article.date}
-                  </div>
-                </div>
-                <CardTitle className="text-xl line-clamp-2">{article.title}</CardTitle>
-                <CardDescription className="line-clamp-3">
-                  {article.description}
-                </CardDescription>
-              </CardHeader>
-              <CardFooter>
-                <Link href={`/news/${article.id}`} className="w-full">
-                  <Button variant="outline" className="w-full">
-                    Читать статью
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+        <RecentArticlesList />
         
         <div className="text-center">
           <Link href="/news">
-            <Button>
+            <Button className="group">
               Все статьи
-              <ChevronRight className="ml-2 h-4 w-4" />
+              <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
         </div>
