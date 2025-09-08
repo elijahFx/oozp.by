@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Handle Next.js API routes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/(.*)$ http://localhost:3000/api/$1 [P,L]
+
+# Handle Next.js pages
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
+
+# Security headers
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+Header always set X-XSS-Protection "1; mode=block"

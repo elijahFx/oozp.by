@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "install": "npm install"
+    "install": "npm install",
+    "deploy:prepare": "npm run build && npm run deploy:copy",
+    "deploy:copy": "node scripts/copy-deploy-files.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
