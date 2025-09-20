@@ -83,6 +83,17 @@ else
     exit 1
 fi
 
+# Verify build exists
+if [ ! -d ".next" ]; then
+    print_error ".next directory not found after build"
+    exit 1
+fi
+
+if [ ! -f ".next/BUILD_ID" ]; then
+    print_error "BUILD_ID file not found in .next directory"
+    exit 1
+fi
+
 # Check if server.js exists
 if [ ! -f "server.js" ]; then
     print_error "server.js file not found. Please ensure it exists."

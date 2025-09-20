@@ -8,7 +8,6 @@ import { fetchLegalDocumentById } from "../../../lib/legal-api";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from "next";
-import ScrollToTopButton from "@/components/scroll/ScrollToTopButton";
 import { formatDocumentText } from "@/lib/formatLegalDocuments";
 
 interface PageProps {
@@ -295,7 +294,6 @@ async function LegalDocumentContent({ id }: { id: string }) {
           </Link>
         </div>
       </div>
-      <ScrollToTopButton />
     </div>
   );
 }

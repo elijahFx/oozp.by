@@ -20,6 +20,20 @@ const testimonials = [
     rating: 5,
     date: "25 августа 2025 г."
   },
+  {
+    content: `Спасибо большое Глебу за грамотные консультации и сопровождение! Профессионально, максимально корректно. Несравненное ощущение того, что ты не один на один с проблемой. Так держать, успехов!`,
+    author: "Elena Levkovich",
+    initials: "EL",
+    rating: 5,
+    date: "10 сентября 2025 г."
+  },
+  {
+    content: "Спасибо большое за консультацию, очень быстро и грамотно мне ответили на мои вопросы, помогли с планом дальнейших действий, рекомендую!!!!",
+    author: "Наталья Лютыч",
+    initials: "НЛ",
+    rating: 5,
+    date: "12 сентября 2025 г."
+  },
   
 ]
 
@@ -53,8 +67,8 @@ export default function Testimonials() {
               <div className="flex">
                 {renderStars(5)}
               </div>
-              <span className="text-lg font-semibold">5/5</span>
-              <span className="text-muted-foreground">на основе 2 отзывов</span>
+              <span className="text-lg font-semibold">{5}/5</span>
+              <span className="text-muted-foreground">на основе {testimonials.length} отзывов</span>
             </div>
             <a
               href="https://yandex.by/maps/org/obshchestvo_zashchity_potrebiteley_avtopotrebitel/200450668342/reviews/?ll=27.529708%2C53.910548&z=17"

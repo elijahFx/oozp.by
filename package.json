@@ -7,11 +7,14 @@
     "build": "next build",
     "start": "next start",
     "start:server": "node server.js",
+    "start:safe": "node build-and-start.js",
+    "kill-port": "node kill-port.js",
     "lint": "next lint",
     "install": "npm install",
     "deploy:prepare": "npm run build && npm run deploy:copy",
     "deploy:copy": "node scripts/copy-deploy-files.js",
-    "self-host": "npm run build && npm run start:server"
+    "self-host": "npm run build && npm run start:server",
+    "restart": "npm run kill-port && npm run start:server"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

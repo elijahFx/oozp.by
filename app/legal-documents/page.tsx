@@ -180,7 +180,7 @@ async function LegalDocumentsList() {
                           Изменений: <span className="font-medium">{document.amendments.length}</span>
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          Последнее: {document.amendments[0]?.date}
+                          Последнее: {document.amendments[document.amendments.length - 1]?.date}
                         </p>
                       </div>
                     )}

@@ -83,6 +83,39 @@ export async function fetchArticleById(id: string): Promise<Article | null> {
   }
 }
 
+export async function fetchNextArticleId(currentArticleId: string): Promise<string | null> {
+  try {
+    // Получаем все статьи
+    const articles = await fetchArticles();
+    
+    if (!articles || articles.length === 0) {
+      return null;
+    }
+
+    // Сортируем статьи по дате создания (новые сначала)
+    const sortedArticles = [...articles].sort((a, b) => {
+      const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      return dateB - dateA;
+    });
+
+    // Находим индекс текущей статьи
+    const currentIndex = sortedArticles.findIndex(article => article.id === currentArticleId);
+    
+    // Если статья не найдена или это последняя статья
+    if (currentIndex === -1 || currentIndex === sortedArticles.length - 1) {
+      return null;
+    }
+
+    // Возвращаем ID следующей статьи
+    return sortedArticles[currentIndex + 1].id || null;
+    
+  } catch (error) {
+    console.error('Error fetching next article ID:', error);
+    return null;
+  }
+}
+
 // Transform API article to match our interface
 function transformArticle(apiArticle: any): Article {
   // Parse tags if they're a string

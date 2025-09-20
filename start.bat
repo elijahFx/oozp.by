@@ -62,6 +62,19 @@ if %errorlevel% neq 0 (
 )
 echo [SUCCESS] Application built successfully
 
+REM Verify build exists
+if not exist ".next" (
+    echo [ERROR] .next directory not found after build
+    pause
+    exit /b 1
+)
+
+if not exist ".next\BUILD_ID" (
+    echo [ERROR] BUILD_ID file not found in .next directory
+    pause
+    exit /b 1
+)
+
 REM Check if server.js exists
 if not exist "server.js" (
     echo [ERROR] server.js file not found. Please ensure it exists.
