@@ -5,6 +5,8 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import FloatingButtons from "@/components/scroll/FloatingButtons";
 import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
+import { Suspense } from "react";
+import { AnalyticsTracker } from '@/components/analytics/AnalyticsTracker';
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -118,16 +120,17 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://yandex.by" />
       </head>
       <body className={inter.className}>
-        <AnalyticsProvider yandexCounterId={104384730}>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow" role="main">
-              {children}
-            </main>
-            <Footer />
-            <FloatingButtons />
-          </div>
-        </AnalyticsProvider>
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <main className="flex-grow" role="main">
+            {children}
+          </main>
+          <Footer />
+          <FloatingButtons />
+        </div>
+        <Suspense fallback={null}>
+          <AnalyticsTracker yandexCounterId={104384730} />
+        </Suspense>
       </body>
     </html>
   );
