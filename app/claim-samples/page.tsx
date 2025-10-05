@@ -8,8 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 import { Metadata } from "next";
+import { DownloadButton } from "@/components/claims/DownloadButton";
 
 export const metadata: Metadata = {
   title: "Образцы претензий | Автопотребитель - готовые шаблоны документов",
@@ -68,29 +69,6 @@ const claimSamples = [
 ];
 
 export default function ClaimSamplesPage() {
-  const handleDownload = (filename: string, slug: string) => {
-    // Создаем ссылку на файл в папке public
-    const fileUrl = `/docs/${filename}`;
-
-    // Отслеживаем скачивание
-    if (typeof window !== 'undefined') {
-      if ((window as any).ym) {
-        (window as any).ym(104384730, 'reachGoal', `claim_download_${slug}`);
-      }
-      if ((window as any).gtag) {
-        (window as any).gtag('event', `claim_download_${slug}`);
-      }
-    }
-
-    // Создаем временную ссылку для скачивания
-    const link = document.createElement("a");
-    link.href = fileUrl;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="max-w-5xl mx-auto">
@@ -139,15 +117,9 @@ export default function ClaimSamplesPage() {
                 </CardDescription>
               </CardContent>
               <CardFooter className="pt-4 mt-auto">
-                <Button 
-                  variant="outline" 
-                  className="w-full"
-                  onClick={() => handleDownload(sample.filename, sample.slug)}
-                  data-track-event={`claim_samples_download_${sample.slug}`}
-                >
-                  <Download className="mr-2 h-4 w-4" />
+                <DownloadButton filename={sample.filename} slug={sample.slug}>
                   Скачать образец
-                </Button>
+                </DownloadButton>
               </CardFooter>
             </Card>
           ))}
