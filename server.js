@@ -6,30 +6,32 @@ const path = require('path');
 // Load environment variables
 require('dotenv').config();
 
-const dev = process.env.NODE_ENV !== 'production';
-const hostname = 'localhost';
-const port = parseInt(process.env.PORT || '3000', 10);
+const dev = false;
+const hostname = 'by3020.hb.by'; // Правильный формат
+const port = 3000;
 
-// Function to find an available port
-const findAvailablePort = (startPort) => {
+// Функция для поиска свободного порта на УКАЗАННОМ hostname
+const findAvailablePort = (startPort, host) => {
   return new Promise((resolve, reject) => {
-    const server = require('http').createServer();
+    const testServer = require('http').createServer();
     
-    server.listen(startPort, (err) => {
+    testServer.listen(startPort, host, (err) => {
       if (err) {
         if (err.code === 'EADDRINUSE') {
-          // Try next port
-          findAvailablePort(startPort + 1).then(resolve).catch(reject);
+          console.log(`Port ${startPort} on ${host} is busy, trying ${startPort + 1}...`);
+          findAvailablePort(startPort + 1, host).then(resolve).catch(reject);
         } else {
           reject(err);
         }
       } else {
-        server.once('close', () => {
+        testServer.once('close', () => {
           resolve(startPort);
         });
-        server.close();
+        testServer.close();
       }
     });
+    
+    testServer.on('error', reject);
   });
 };
 
@@ -44,72 +46,27 @@ const app = next({
 const handle = app.getRequestHandler();
 
 app.prepare().then(async () => {
-  // Find an available port
-  const availablePort = await findAvailablePort(port);
-  
-  if (availablePort !== port) {
-    console.log(`⚠️  Port ${port} is already in use. Using port ${availablePort} instead.`);
-  }
-
-  createServer(async (req, res) => {
+  const server = createServer(async (req, res) => {
     try {
       const parsedUrl = parse(req.url, true);
-      const { pathname, query } = parsedUrl;
-
-      // Handle static files
-      if (pathname.startsWith('/_next/static/') || 
-          pathname.startsWith('/favicon') ||
-          pathname.startsWith('/images/') ||
-          pathname.startsWith('/public/')) {
-        await handle(req, res, parsedUrl);
-        return;
-      }
-
-      // Handle API routes
-      if (pathname.startsWith('/api/')) {
-        await handle(req, res, parsedUrl);
-        return;
-      }
-
-      // Handle all other routes
       await handle(req, res, parsedUrl);
     } catch (err) {
       console.error('Error occurred handling', req.url, err);
       res.statusCode = 500;
       res.end('internal server error');
     }
-  })
-  .once('error', (err) => {
-    console.error('Server error:', err);
-    process.exit(1);
-  })
-  .listen(availablePort, hostname, () => {
-    console.log(`> Ready on http://${hostname}:${availablePort}`);
-    console.log(`> Environment: ${process.env.NODE_ENV}`);
-    console.log(`> Process ID: ${process.pid}`);
+  });
+
+  // Пытаемся слушать на указанном порту и hostname
+  server.listen(port, hostname, (err) => {
+    if (err && err.code === 'EADDRINUSE') {
+      console.log(`Port ${port} on ${hostname} is busy, trying ${port + 1}...`);
+      server.listen(port + 1, hostname);
+    } else if (err) {
+      console.error('Server error:', err);
+      process.exit(1);
+    } else {
+      console.log(`> Ready on http://${hostname}:${port}`);
+    }
   });
 });
-
-// Graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
-  process.exit(0);
-});
-
-process.on('SIGINT', () => {
-  console.log('SIGINT received, shutting down gracefully');
-  process.exit(0);
-});
-
-// Handle uncaught exceptions
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err);
-  process.exit(1);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  process.exit(1);
-});
-
-

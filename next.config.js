@@ -1,13 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: false,
-  output: 'standalone',
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: { 
     unoptimized: true,
-    domains: ['images.pexels.com', 'yandex.by'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -16,7 +14,6 @@ const nextConfig = {
     ],
   },
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: [
       "lucide-react",
       "@radix-ui/react-dialog",
@@ -27,14 +24,14 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: false,
   typescript: {
-    ignoreBuildErrors: true, // Игнорировать ошибки при сборке
+    ignoreBuildErrors: true,
   },
-  swcMinify: true,
+  // swcMinify is now enabled by default and deprecated in config
+  // optimizeFonts is now enabled by default and deprecated in config
   assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
   basePath: '',
   // Production optimizations
   productionBrowserSourceMaps: false,
-  optimizeFonts: true,
   // Security headers
   async headers() {
     return [
@@ -59,10 +56,13 @@ const nextConfig = {
   },
   modularizeImports: {
     "lucide-react": {
-      transform: "lucide-react/dist/esm/icons/{{kebabCase member}}",
+      transform:
+"lucide-react/dist/esm/icons/{{kebabCase member}}",
       preventFullImport: true,
     },
   },
+  // Add this to resolve the workspace root warning
+  outputFileTracingRoot: __dirname,
 };
 
 module.exports = nextConfig;
