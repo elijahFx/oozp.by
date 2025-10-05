@@ -28,11 +28,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${document.title} | Автопотребитель`,
+    title: `${document.name} | Автопотребитель`,
     description: document.description,
     keywords: `${document.title}, ${document.category}, законодательство беларуси, нормативные акты`,
     openGraph: {
-      title: document.title,
+      title: document.name,
       description: document.description,
       type: "article",
       locale: "ru_BY",
@@ -73,7 +73,7 @@ const getDocumentTypeName = (type: string) => {
 const getStatusBadge = (status: string) => {
   switch (status) {
     case 'active':
-      return <Badge className="bg-green-100 text-green-800">Действует</Badge>;
+      return <Badge>Действует</Badge>;
     case 'repealed':
       return <Badge variant="destructive">Отменен</Badge>;
     case 'suspended':
@@ -208,7 +208,7 @@ async function LegalDocumentContent({ id }: { id: string }) {
           <Card>
             <CardContent className="p-8">
               <div className="prose prose-lg max-w-none">
-                {formatDocumentText(document.content)}
+                {formatDocumentText(document.content, document.type)}
               </div>
             </CardContent>
           </Card>

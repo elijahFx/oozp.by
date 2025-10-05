@@ -23,11 +23,11 @@ export const metadata: Metadata = {
 
 const getDocumentTypeIcon = (type: string) => {
   switch (type) {
-    case 'code':
+    case 'Кодекс':
       return <BookOpen className="h-5 w-5" />;
-    case 'law':
+    case 'Закон':
       return <Scale className="h-5 w-5" />;
-    case 'decree':
+    case 'Постановление':
       return <FileText className="h-5 w-5" />;
     default:
       return <FileText className="h-5 w-5" />;
@@ -41,7 +41,7 @@ const getDocumentTypeName = (type: string) => {
 const getStatusBadge = (status: string) => {
   switch (status) {
     case 'active':
-      return <Badge variant="default" className="bg-green-100 text-green-800">Действует</Badge>;
+      return <Badge variant="default" >Действует</Badge>;
     case 'repealed':
       return <Badge variant="destructive">Отменен</Badge>;
     case 'suspended':
@@ -53,6 +53,7 @@ const getStatusBadge = (status: string) => {
 
 async function LegalDocumentsList() {
   const documents = await fetchLegalDocuments();
+  
   
 
   const documentsByType = documents.reduce((acc, doc) => {
@@ -71,30 +72,64 @@ async function LegalDocumentsList() {
         <Input
           placeholder="Поиск по названию документа..."
           className="pl-10"
+          data-track-event="legal_documents_search_focus"
         />
       </div>
 
       <Tabs defaultValue="all" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="all">Все документы</TabsTrigger>
-          <TabsTrigger value="Закон">Законы</TabsTrigger>
-          <TabsTrigger value="Кодекс">Кодексы</TabsTrigger>
-          <TabsTrigger value="Декрет">Декреты</TabsTrigger>
+          <TabsTrigger 
+            value="all"
+            data-track-event="legal_documents_tab_all"
+          >
+            Все документы
+          </TabsTrigger>
+          <TabsTrigger 
+            value="Закон"
+            data-track-event="legal_documents_tab_laws"
+          >
+            Законы
+          </TabsTrigger>
+          <TabsTrigger 
+            value="Кодекс"
+            data-track-event="legal_documents_tab_codes"
+          >
+            Кодексы
+          </TabsTrigger>
+          <TabsTrigger 
+            value="Постановление"
+            data-track-event="legal_documents_tab_decrees"
+          >
+            Постановления
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="all" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {documents.map((document) => (
-              <Card key={document.id} className="flex flex-col h-full hover:shadow-lg transition-shadow">
+              <Card 
+                key={document.id} 
+                className="flex flex-col h-full hover:shadow-lg transition-shadow"
+                data-track-event={`legal_documents_card_${document.id}`}
+              >
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center space-x-2">
                       {getDocumentTypeIcon(document.type)}
-                      <Badge variant="outline">{getDocumentTypeName(document.type)}</Badge>
+                      <Badge 
+                        variant="outline"
+                        data-track-event={`legal_documents_type_${document.type.toLowerCase()}`}
+                      >
+                        {getDocumentTypeName(document.type)}
+                      </Badge>
                     </div>
-                    {getStatusBadge(document.status || "active")}
+                    <div 
+                      data-track-event={`legal_documents_status_${document.status || 'active'}`}
+                    >
+                      {getStatusBadge(document.status || "active")}
+                    </div>
                   </div>
-                  <CardTitle className="text-lg line-clamp-2">{document.title}</CardTitle>
+                  <CardTitle className="text-lg line-clamp-2">{document.name}</CardTitle>
                   <CardDescription className="line-clamp-2">
                     {document.description}
                   </CardDescription>
@@ -128,8 +163,16 @@ async function LegalDocumentsList() {
                 </CardContent>
                 
                 <CardFooter>
-                  <Link href={`/legal-documents/${document.id}`} className="w-full">
-                    <Button variant="outline" className="w-full">
+                  <Link 
+                    href={`/legal-documents/${document.id}`} 
+                    className="w-full"
+                    data-track-event={`legal_documents_read_${document.id}`}
+                  >
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      data-track-event={`legal_documents_read_button_${document.id}`}
+                    >
                       Читать документ
                       <ChevronRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -144,16 +187,29 @@ async function LegalDocumentsList() {
           <TabsContent key={type} value={type} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {docs.map((document) => (
-                <Card key={document.id} className="flex flex-col h-full hover:shadow-lg transition-shadow">
+                <Card 
+                  key={document.id} 
+                  className="flex flex-col h-full hover:shadow-lg transition-shadow"
+                  data-track-event={`legal_documents_card_${document.id}`}
+                >
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center space-x-2">
                         {getDocumentTypeIcon(document.type)}
-                        <Badge variant="outline">{getDocumentTypeName(document.type)}</Badge>
+                        <Badge 
+                          variant="outline"
+                          data-track-event={`legal_documents_type_${document.type.toLowerCase()}`}
+                        >
+                          {getDocumentTypeName(document.type)}
+                        </Badge>
                       </div>
-                      {getStatusBadge(document.status || "active")}
+                      <div 
+                        data-track-event={`legal_documents_status_${document.status || 'active'}`}
+                      >
+                        {getStatusBadge(document.status || "active")}
+                      </div>
                     </div>
-                    <CardTitle className="text-lg line-clamp-2">{document.title}</CardTitle>
+                    <CardTitle className="text-lg line-clamp-2">{document.name}</CardTitle>
                     <CardDescription className="line-clamp-2">
                       {document.description}
                     </CardDescription>
@@ -187,8 +243,16 @@ async function LegalDocumentsList() {
                   </CardContent>
                   
                   <CardFooter>
-                    <Link href={`/legal-documents/${document.id}`} className="w-full">
-                      <Button variant="outline" className="w-full">
+                    <Link 
+                      href={`/legal-documents/${document.id}`} 
+                      className="w-full"
+                      data-track-event={`legal_documents_read_${document.id}`}
+                    >
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        data-track-event={`legal_documents_read_button_${document.id}`}
+                      >
                         Читать документ
                         <ChevronRight className="ml-2 h-4 w-4" />
                       </Button>
@@ -263,10 +327,21 @@ export default function LegalDocumentsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contacts">
-                <Button size="lg">Получить консультацию</Button>
+                <Button 
+                  size="lg"
+                  data-track-event="legal_documents_consultation_button"
+                >
+                  Получить консультацию
+                </Button>
               </Link>
               <Link href="/claim-builder">
-                <Button variant="outline" size="lg">Составить претензию</Button>
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  data-track-event="legal_documents_builder_button"
+                >
+                  Составить претензию
+                </Button>
               </Link>
             </div>
           </div>

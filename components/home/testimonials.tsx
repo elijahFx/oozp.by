@@ -74,6 +74,7 @@ export default function Testimonials() {
               href="https://yandex.by/maps/org/obshchestvo_zashchity_potrebiteley_avtopotrebitel/200450668342/reviews/?ll=27.529708%2C53.910548&z=17"
               target="_blank"
               rel="noopener noreferrer"
+              data-track-event="testimonials_all_reviews_yandex"
               className="inline-flex items-center gap-2"
             >
               <Button variant="outline" className="bg-yellow-50 border-yellow-200 hover:bg-yellow-100">
@@ -92,7 +93,11 @@ export default function Testimonials() {
       <div className="relative">
         <div className="flex animate-scroll space-x-8">
           {duplicatedTestimonials.map((testimonial, index) => (
-            <Card key={index} className="flex-shrink-0 w-96 bg-background/90 backdrop-blur-sm shadow-xl border-0 hover:shadow-2xl transition-all duration-300">
+            <Card 
+              key={index} 
+              className="flex-shrink-0 w-96 bg-background/90 backdrop-blur-sm shadow-xl border-0 hover:shadow-2xl transition-all duration-300"
+              data-track-event={`testimonials_review_view_${index % testimonials.length + 1}`}
+            >
               <CardContent className="pt-6 pb-4">
                 {/* Rating Stars */}
                 <div className="flex items-center gap-1 mb-4">
@@ -148,17 +153,29 @@ export default function Testimonials() {
             Присоединяйтесь к сотням довольных клиентов
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+375296062598">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
+            <a 
+              href="tel:+375296062598"
+              data-track-event="testimonials_phone_consultation"
+            >
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90"
+                data-track-event="testimonials_get_consultation"
+              >
                 Получить консультацию
               </Button>
             </a>
             <a
-              href="https://yandex.by/maps/org/avtopotrebitel/1234567890/reviews/"
+              href="https://yandex.by/maps/org/obshchestvo_zashchity_potrebiteley_avtopotrebitel/200450668342/reviews/?add-review=true&ll=27.529885%2C53.910569&z=18"
               target="_blank"
               rel="noopener noreferrer"
+              data-track-event="testimonials_leave_review"
             >
-              <Button variant="outline" size="lg">
+              <Button 
+                variant="outline" 
+                size="lg"
+                data-track-event="testimonials_leave_review_button"
+              >
                 Оставить отзыв
                 <ExternalLink className="w-4 h-4 ml-2" />
               </Button>

@@ -24,7 +24,8 @@ export default function Hero() {
             {/* Телефон горячей линии и адрес */}
             <div className="mt-8 p-6 bg-background/90 backdrop-blur-sm border border-primary/20 rounded-xl shadow-lg">
               <p className="text-sm text-muted-foreground mb-2">Телефон горячей линии:</p>
-              <a 
+              <a
+                data-track-event="hero_phone_click"
                 href="tel:+375296062598" 
                 className="text-2xl sm:text-3xl font-bold text-primary hover:text-primary/80 transition-colors block"
                 aria-label="Позвонить по телефону горячей линии +375 29 606 25 98"
@@ -44,12 +45,21 @@ export default function Hero() {
       
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Link href="/contacts" passHref>
-                <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 shadow-lg">
+                <Button 
+                  data-track-event="hero_get_consultation" 
+                  size="lg" 
+                  className="w-full sm:w-auto bg-primary hover:bg-primary/90 shadow-lg"
+                >
                   Получить консультацию
                 </Button>
               </Link>
               <Link href="/about" passHref>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto bg-background/80 backdrop-blur-sm hover:bg-background/90">
+                <Button 
+                  data-track-event="hero_learn_more" 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full sm:w-auto bg-background/80 backdrop-blur-sm hover:bg-background/90"
+                >
                   Узнать больше
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>

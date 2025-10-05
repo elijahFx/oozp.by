@@ -28,23 +28,27 @@ const claimSamples = [
     title: "Претензия по некачественному товару",
     description: "Требование о возврате денежных средств за товар",
     filename: "neck-tovar.docx",
+    slug: "neckachestvennyy_tovar"
   },
   {
     title: "Претензия по некачественной работе (услуге)",
     description: "Требование о возврате денежных средств за работу (услугу)",
     filename: "neck-usl.docx",
+    slug: "neckachestvennaya_usluga"
   },
   {
     title: "Претензия о нарушении сроков выполнения работ",
     description:
       "Требование о расторжении договора с возвратом денежных средств",
     filename: "sroki-usl.docx",
+    slug: "narushenie_srokov_rabot"
   },
   {
     title: "Претензия о нарушении сроков поставки товара",
     description:
       "Требование о возврате денежных средств за непоставленный товар",
     filename: "sroki-tov.docx",
+    slug: "narushenie_srokov_postavki"
   },
   {
     title:
@@ -52,19 +56,31 @@ const claimSamples = [
     description:
       "Требование о возврате денежных средств в связи с отсутствием необходимости в выполнении работ (оказании услуг)",
     filename: "otk-usl.docx",
+    slug: "otkaz_ot_uslug"
   },
   {
     title: "Претензия о возврате качественного товара",
     description:
       "Требование о возврате денежных средств за товар надлежащего качества, не подошедший по характеристикам",
     filename: "otk-tov.docx",
+    slug: "vozvrat_kachestvennogo_tovara"
   },
 ];
 
 export default function ClaimSamplesPage() {
-  const handleDownload = (filename: string) => {
+  const handleDownload = (filename: string, slug: string) => {
     // Создаем ссылку на файл в папке public
     const fileUrl = `/docs/${filename}`;
+
+    // Отслеживаем скачивание
+    if (typeof window !== 'undefined') {
+      if ((window as any).ym) {
+        (window as any).ym(104384730, 'reachGoal', `claim_download_${slug}`);
+      }
+      if ((window as any).gtag) {
+        (window as any).gtag('event', `claim_download_${slug}`);
+      }
+    }
 
     // Создаем временную ссылку для скачивания
     const link = document.createElement("a");
@@ -93,7 +109,11 @@ export default function ClaimSamplesPage() {
             <strong>Внимание!</strong> Данные образцы носят общий характер. Для
             получения индивидуальной консультации и помощи в составлении
             претензии, пожалуйста,{" "}
-            <Link href="/contacts" className="text-primary hover:underline">
+            <Link 
+              href="/contacts" 
+              className="text-primary hover:underline"
+              data-track-event="claim_samples_contacts_link"
+            >
               свяжитесь с нами
             </Link>
             .
@@ -102,7 +122,11 @@ export default function ClaimSamplesPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {claimSamples.map((sample, index) => (
-            <Card key={index} className="flex flex-col h-full">
+            <Card 
+              key={index} 
+              className="flex flex-col h-full"
+              data-track-event={`claim_samples_card_${sample.slug}`}
+            >
               <CardHeader className="pb-3">
                 <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mb-3">
                   <FileText className="h-5 w-5 text-primary" />
@@ -115,14 +139,15 @@ export default function ClaimSamplesPage() {
                 </CardDescription>
               </CardContent>
               <CardFooter className="pt-4 mt-auto">
-                <Link href={`/docs/${sample.filename}`} passHref legacyBehavior>
-                  <Button variant="outline" className="w-full" asChild>
-                    <a download target="_blank" rel="noopener noreferrer">
-                      <Download className="mr-2 h-4 w-4" />
-                      Скачать образец
-                    </a>
-                  </Button>
-                </Link>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => handleDownload(sample.filename, sample.slug)}
+                  data-track-event={`claim_samples_download_${sample.slug}`}
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Скачать образец
+                </Button>
               </CardFooter>
             </Card>
           ))}
@@ -138,10 +163,19 @@ export default function ClaimSamplesPage() {
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <Link href="/contacts" passHref>
-              <Button>Связаться с нами</Button>
+              <Button 
+                data-track-event="claim_samples_contacts_button"
+              >
+                Связаться с нами
+              </Button>
             </Link>
             <Link href="/claim-builder" passHref>
-              <Button variant="outline">Конструктор претензий</Button>
+              <Button 
+                variant="outline"
+                data-track-event="claim_samples_builder_button"
+              >
+                Конструктор претензий
+              </Button>
             </Link>
           </div>
         </div>

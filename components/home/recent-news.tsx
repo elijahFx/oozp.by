@@ -11,7 +11,11 @@ async function RecentArticlesList() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
       {recentArticles.reverse().map((article) => (
-        <Card key={article.id} className="hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+        <Card 
+          key={article.id} 
+          className="hover:shadow-lg transition-shadow duration-300 h-full flex flex-col"
+          data-track-event={`news_article_card_${article.id}`}
+        >
           <CardHeader className="flex-1">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
@@ -28,8 +32,16 @@ async function RecentArticlesList() {
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <Link href={`/news/${article.url || article.id}`} className="w-full">
-              <Button variant="outline" className="w-full group">
+            <Link 
+              href={`/news/${article.url || article.id}`} 
+              className="w-full"
+              data-track-event={`news_read_article_${article.id}`}
+            >
+              <Button 
+                variant="outline" 
+                className="w-full group"
+                data-track-event={`news_read_article_button_${article.id}`}
+              >
                 Читать статью
                 <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -55,8 +67,11 @@ export default function RecentNews() {
         <RecentArticlesList />
         
         <div className="text-center">
-          <Link href="/news">
-            <Button className="group">
+          <Link href="/news" data-track-event="news_view_all_articles">
+            <Button 
+              className="group"
+              data-track-event="news_view_all_articles_button"
+            >
               Все статьи
               <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>

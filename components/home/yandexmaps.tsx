@@ -84,7 +84,13 @@ export default function YandexMap() {
               >
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
-              <span>+375 29 606-25-98</span>
+              <a 
+                href="tel:+375296062598"
+                data-track-event="map_phone_click"
+                className="hover:text-blue-600 transition-colors"
+              >
+                +375 29 606-25-98
+              </a>
             </div>
           </div>
 
@@ -140,6 +146,7 @@ export default function YandexMap() {
             href="https://yandex.by/maps/?text=220004,+г.+Минск,+ул.+Амураторская,+д.+4,+каб.+209"
             target="_blank"
             rel="noopener noreferrer"
+            data-track-event="map_open_yandex_maps"
             className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
           >
             Открыть в Яндекс Картах
@@ -147,12 +154,16 @@ export default function YandexMap() {
         </div>
 
         {/* Карта */}
-        <div className="w-full lg:w-2/3 h-[500px] rounded-lg overflow-hidden shadow-lg">
+        <div 
+          className="w-full lg:w-2/3 h-[500px] rounded-lg overflow-hidden shadow-lg"
+          data-track-event="map_interaction"
+        >
           <iframe
             src="https://yandex.ru/map-widget/v1/?um=constructor%3Acc80794c4492aa55af56daa6582678478fe18d029c58addfba20636bc3a1ea8a&amp;source=constructor"
             width="100%"
             height="100%"
             loading="lazy"
+            title="Карта расположения офиса Автопотребитель"
           ></iframe>
           <div className="sr-only">
             <h3>Местоположение офиса</h3>

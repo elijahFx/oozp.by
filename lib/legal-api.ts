@@ -39,32 +39,92 @@ export interface LegalApiResponse {
 const LEGAL_API_BASE_URL = 'https://apocrypha.su';
 
 // Parse changes string into amendments array
+// Parse changes string into amendments array
 function parseChanges(changesString: string): LegalAmendment[] {
   if (!changesString) return [];
   
   const amendments: LegalAmendment[] = [];
-  const changeEntries = changesString.split('\r\n\r\n').filter(entry => entry.trim());
+  
+  // Разделяем строку по точкам с запятой, которые обычно разделяют изменения
+  const changeEntries = changesString.split(';').filter(entry => entry.trim());
   
   changeEntries.forEach((entry, index) => {
-    const match = entry.match(/Закон Республики Беларусь от (.+?) г\. № (.+?) \(/);
+    const trimmedEntry = entry.trim();
+    if (!trimmedEntry) return;
+    
+    // Паттерны для различных типов документов
+    const lawPattern = /Закон Республики Беларусь от (.+?) г\. № (.+?)(?=\s|$|;|<)/;
+    const decreePattern = /Декрет Президента Республики Беларусь от (.+?) г\. № (.+?)(?=\s|$|;|<)/;
+    const resolutionPattern = /Постановление (?:Совета Министров|Правительства) Республики Беларусь от (.+?) г\. № (.+?)(?=\s|$|;|<)/;
+    const regulationPattern = /Постановление (.+?) от (.+?) г\. № (.+?)(?=\s|$|;|<)/;
+    
+    let match = null;
+    let type: 'amendment' | 'addition' | 'deletion' | 'revision' = 'amendment';
+    let date = '';
+    let number = '';
+    
+    // Определяем тип документа и извлекаем данные
+    if (lawPattern.test(trimmedEntry)) {
+      match = trimmedEntry.match(lawPattern);
+    } else if (decreePattern.test(trimmedEntry)) {
+      match = trimmedEntry.match(decreePattern);
+    } else if (resolutionPattern.test(trimmedEntry)) {
+      match = trimmedEntry.match(resolutionPattern);
+    } else if (regulationPattern.test(trimmedEntry)) {
+      match = trimmedEntry.match(regulationPattern);
+    }
+    
     if (match) {
-      const date = match[1];
-      const number = match[2];
+      // Для разных паттернов разное количество групп захвата
+      if (lawPattern.test(trimmedEntry) || decreePattern.test(trimmedEntry)) {
+        date = match[1];
+        number = match[2];
+      } else if (resolutionPattern.test(trimmedEntry)) {
+        date = match[1];
+        number = match[2];
+      } else if (regulationPattern.test(trimmedEntry)) {
+        date = match[2];
+        number = match[3];
+      }
       
-      let type: 'amendment' | 'addition' | 'deletion' | 'revision' = 'amendment';
-      if (entry.includes('новая редакция')) {
+      // Определяем тип изменения
+      if (trimmedEntry.includes('новая редакция')) {
         type = 'revision';
-      } else if (entry.includes('дополнен')) {
+      } else if (trimmedEntry.includes('дополнен') || trimmedEntry.includes('дополнения')) {
         type = 'addition';
-      } else if (entry.includes('исключен')) {
+      } else if (trimmedEntry.includes('исключен') || trimmedEntry.includes('исключены')) {
         type = 'deletion';
+      } else if (trimmedEntry.includes('изменения') || trimmedEntry.includes('изменены')) {
+        type = 'amendment';
+      }
+      
+      // Извлекаем номера статей, если они указаны
+      const articleMatches = trimmedEntry.match(/стать(?:ей|и|ю|ями) (\d+(?:[-\d\s,и]+)?)/g);
+      let articleNumbers: string[] = [];
+      
+      if (articleMatches) {
+        articleMatches.forEach(articleMatch => {
+          const numbers = articleMatch.match(/\d+/g);
+          if (numbers) {
+            articleNumbers.push(...numbers);
+          }
+        });
       }
       
       amendments.push({
         id: `amendment-${index}`,
-        date: date,
-        description: entry.trim(),
-        type: type
+        date: date.trim(),
+        description: trimmedEntry,
+        type: type,
+        articleNumbers: articleNumbers.length > 0 ? articleNumbers : undefined
+      });
+    } else {
+      // Если не удалось распарсить по стандартным паттернам, создаем общую запись
+      amendments.push({
+        id: `amendment-${index}`,
+        date: 'Не указана',
+        description: trimmedEntry,
+        type: 'amendment'
       });
     }
   });

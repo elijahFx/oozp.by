@@ -18,6 +18,7 @@ export default function Footer() {
                     href="tel:+375296062598"
                     className="hover:text-primary transition-colors block"
                     aria-label="Позвонить по телефону +375 29 606 25 98"
+                    data-track-event="footer_phone_click"
                   >
                     +375 29 606 25 98
                   </a>
@@ -36,6 +37,7 @@ export default function Footer() {
                     href="https://t.me/+375296062598"
                     className="hover:text-primary transition-colors block"
                     aria-label="Написать в Telegram"
+                    data-track-event="footer_telegram_click"
                   >
                     Telegram
                   </a>
@@ -43,6 +45,7 @@ export default function Footer() {
                     href="viber://chat?number=%2B375296062598"
                     className="hover:text-primary transition-colors block"
                     aria-label="Написать в Viber"
+                    data-track-event="footer_viber_click"
                   >
                     Viber
                   </a>
@@ -60,6 +63,7 @@ export default function Footer() {
                   href="mailto:legal@oozp.by"
                   className="hover:text-primary transition-colors"
                   aria-label="Написать на email legal@oozp.by"
+                  data-track-event="footer_email_click"
                 >
                   legal@oozp.by
                 </a>
@@ -76,6 +80,7 @@ export default function Footer() {
                     href="/about"
                     className="hover:text-primary transition-colors"
                     prefetch={true}
+                    data-track-event="footer_about_click"
                   >
                     О нас
                   </Link>
@@ -85,6 +90,7 @@ export default function Footer() {
                     href="/contacts"
                     className="hover:text-primary transition-colors"
                     prefetch={true}
+                    data-track-event="footer_contacts_click"
                   >
                     Контакты
                   </Link>
@@ -94,6 +100,7 @@ export default function Footer() {
                     href="/claim-samples"
                     className="hover:text-primary transition-colors"
                     prefetch={true}
+                    data-track-event="footer_claim_samples_click"
                   >
                     Образцы претензий
                   </Link>
@@ -103,6 +110,7 @@ export default function Footer() {
                     href="/legal-documents"
                     className="hover:text-primary transition-colors"
                     prefetch={true}
+                    data-track-event="footer_legal_documents_click"
                   >
                     Правовые акты
                   </Link>
@@ -112,6 +120,7 @@ export default function Footer() {
                     href="/appeal-procedure"
                     className="hover:text-primary transition-colors"
                     prefetch={true}
+                    data-track-event="footer_appeal_procedure_click"
                   >
                     Порядок обращений
                   </Link>
@@ -121,6 +130,7 @@ export default function Footer() {
                     href="/news"
                     className="hover:text-primary transition-colors"
                     prefetch={true}
+                    data-track-event="footer_news_click"
                   >
                     Новости/Статьи
                   </Link>
@@ -130,6 +140,7 @@ export default function Footer() {
                     href="/privacy-policy"
                     className="hover:text-primary transition-colors"
                     prefetch={true}
+                    data-track-event="footer_privacy_policy_click"
                   >
                     Политика обработки персональных данных
                   </Link>
@@ -141,9 +152,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-4">О нас</h3>
             <p className="text-muted-foreground">
-              Общественное объединение по защите прав потребителей "Автопотребитель" защищает права
-              потребителей во всех сферах потребительского рынка. Мы оказываем
-              юридическую помощь и консультации по защите прав потребителей.
+              Общественное объединение по защите прав потребителей
+              "Автопотребитель" защищает права потребителей во всех сферах
+              потребительского рынка. Мы оказываем юридическую помощь и
+              консультации по защите прав потребителей.
             </p>
           </div>
         </div>

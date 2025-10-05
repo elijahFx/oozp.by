@@ -28,7 +28,11 @@ export default function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
+            <Link 
+              href="/" 
+              className="flex items-center space-x-2"
+              data-track-event="header_logo_click"
+            >
               <Image
                 src={logo}
                 alt="Логотип Общества защиты потребителей Автопотребитель"
@@ -55,6 +59,7 @@ export default function Header() {
                         "text-muted-foreground hover:text-foreground hover:border-b-2 hover:border-primary/40",
                         "pr-1 cursor-pointer"
                       )}
+                      data-track-event={`header_menu_hover_${item.name.toLowerCase().replace(/\s+/g, '_')}`}
                     >
                       {item.name}
                       <ChevronDown size={14} className="ml-1 transition-transform group-hover:rotate-180" />
@@ -66,6 +71,7 @@ export default function Header() {
                           key={subItem.name}
                           href={subItem.href}
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary"
+                          data-track-event={`header_submenu_${subItem.name.toLowerCase().replace(/\s+/g, '_')}`}
                         >
                           {subItem.name}
                         </Link>
@@ -80,6 +86,7 @@ export default function Header() {
                       "inline-flex items-center px-2 py-2 text-sm font-medium transition-colors",
                       "text-muted-foreground hover:text-foreground hover:border-b-2 hover:border-primary/40"
                     )}
+                    data-track-event={`header_nav_${item.name.toLowerCase().replace(/\s+/g, '_')}`}
                   >
                     {item.name}
                   </Link>
@@ -94,6 +101,7 @@ export default function Header() {
                 href="tel:+375296062598"
                 className="flex items-center space-x-1 text-sm hover:text-primary transition-colors whitespace-nowrap"
                 aria-label="Позвонить по телефону +375 29 606 25 98"
+                data-track-event="header_phone_click"
               >
                 <Phone size={16} />
                 <span>+375 29 606 25 98</span>
@@ -110,6 +118,7 @@ export default function Header() {
                 href="tel:+375296062598"
                 className="p-2 hover:text-primary transition-colors"
                 aria-label="Позвонить"
+                data-track-event="header_phone_icon_click"
               >
                 <Phone size={18} />
               </a>
@@ -117,6 +126,7 @@ export default function Header() {
                 href="https://t.me/avtopotreb"
                 className="p-2 hover:text-primary transition-colors"
                 aria-label="Telegram"
+                data-track-event="header_telegram_icon_click"
               >
                 <MessageCircle size={18} />
               </a>
@@ -124,6 +134,7 @@ export default function Header() {
                 href="viber://chat?number=375296062598"
                 className="p-2 hover:text-primary transition-colors"
                 aria-label="Viber"
+                data-track-event="header_viber_icon_click"
               >
                 <Phone size={18} className="transform rotate-90" />
               </a>

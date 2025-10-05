@@ -16,14 +16,27 @@ export default function CTA() {
             </p>
           </div>
           <div className="mt-6 md:mt-0 space-y-4 md:space-y-0 md:space-x-4 flex flex-col md:flex-row items-start md:items-center">
-            <a href="tel:+375296062598">
-              <Button variant="secondary" size="lg" className="w-full md:w-auto">
+            <a 
+              href="tel:+375296062598"
+              data-track-event="cta_phone_call"
+            >
+              <Button 
+                variant="secondary" 
+                size="lg" 
+                className="w-full md:w-auto"
+                data-track-event="cta_phone_button"
+              >
                 <PhoneCall className="mr-2 h-4 w-4" />
                 +375 29 606 25 98
               </Button>
             </a>
             <Link href="/contacts" passHref>
-              <Button variant="outline" size="lg" className="bg-transparent border-primary-foreground hover:bg-primary-foreground hover:text-primary w-full md:w-auto">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="bg-transparent border-primary-foreground hover:bg-primary-foreground hover:text-primary w-full md:w-auto"
+                data-track-event="cta_contacts_button"
+              >
                 Контакты
               </Button>
             </Link>

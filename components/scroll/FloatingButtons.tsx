@@ -36,6 +36,7 @@ export default function FloatingButtons() {
           onClick={scrollToTop}
           className="bg-gray-800 hover:bg-gray-900 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center"
           aria-label="Вернуться наверх"
+          data-track-event="floating_scroll_to_top"
         >
           <svg
             width="24"
@@ -59,6 +60,7 @@ export default function FloatingButtons() {
         rel="noopener noreferrer"
         className="bg-[#0088cc] hover:bg-[#0077b3] text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center relative pulsating-element"
         aria-label="Написать в Telegram"
+        data-track-event="floating_telegram_click"
       >
         <div className="absolute inset-0 rounded-full bg-[#0088cc] animate-ping opacity-75"></div>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="relative z-10">
@@ -73,6 +75,7 @@ export default function FloatingButtons() {
         rel="noopener noreferrer"
         className="bg-[#7360f2] hover:bg-[#5e4dd1] text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center relative pulsating-element"
         aria-label="Написать в Viber"
+        data-track-event="floating_viber_click"
       >
         <div className="absolute inset-0 rounded-full bg-[#7360f2] animate-ping opacity-75"></div>
         <PhoneCall className="pr-[1.5px] relative z-10" size={24} />

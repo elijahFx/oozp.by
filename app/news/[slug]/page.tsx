@@ -173,9 +173,6 @@ export default async function NewsArticle({ params }: PageProps) {
     ['жилье', 'залитие квартиры', 'залитие', 'квартира'].includes(tag.toLowerCase())
   );
 
-  console.log(isHousingArticle);
-  
-
    return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:py-12">
       <div className="max-w-4xl mx-auto">

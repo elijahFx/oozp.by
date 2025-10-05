@@ -32,11 +32,32 @@ const ContactForm = () => {
 
       if (response.ok) {
         setIsSubmitted(true);
+        // Отслеживаем успешную отправку формы
+        if (typeof window !== 'undefined' && (window as any).ym) {
+          (window as any).ym(104384730, 'reachGoal', 'contact_form_submit_success');
+        }
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'contact_form_submit_success');
+        }
       } else {
         alert('Произошла ошибка при отправке. Попробуйте еще раз.');
+        // Отслеживаем ошибку отправки
+        if (typeof window !== 'undefined' && (window as any).ym) {
+          (window as any).ym(104384730, 'reachGoal', 'contact_form_submit_error');
+        }
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'contact_form_submit_error');
+        }
       }
     } catch (error) {
       alert('Произошла ошибка при отправке. Проверьте соединение.');
+      // Отслеживаем ошибку сети
+      if (typeof window !== 'undefined' && (window as any).ym) {
+        (window as any).ym(104384730, 'reachGoal', 'contact_form_network_error');
+      }
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'contact_form_network_error');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -70,6 +91,7 @@ const ContactForm = () => {
               placeholder="Иван" 
               required 
               disabled={isLoading}
+              data-track-event="contact_form_first_name_focus"
             />
           </div>
           <div className="space-y-2">
@@ -81,6 +103,7 @@ const ContactForm = () => {
               placeholder="Иванов" 
               required 
               disabled={isLoading}
+              data-track-event="contact_form_last_name_focus"
             />
           </div>
         </div>
@@ -94,6 +117,7 @@ const ContactForm = () => {
             type="email" 
             placeholder="example@mail.com" 
             disabled={isLoading}
+            data-track-event="contact_form_email_focus"
           />
         </div>
         
@@ -106,6 +130,7 @@ const ContactForm = () => {
             placeholder="+375 XX XXX XX XX" 
             required 
             disabled={isLoading}
+            data-track-event="contact_form_phone_focus"
           />
         </div>
         
@@ -119,6 +144,7 @@ const ContactForm = () => {
             rows={5} 
             required 
             disabled={isLoading}
+            data-track-event="contact_form_message_focus"
           />
         </div>
         
@@ -126,6 +152,7 @@ const ContactForm = () => {
           type="submit" 
           className="w-full" 
           disabled={isLoading}
+          data-track-event="contact_form_submit_click"
         >
           {isLoading ? 'Отправка...' : 'Отправить'}
         </Button>

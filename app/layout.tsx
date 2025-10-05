@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import FloatingButtons from "@/components/scroll/FloatingButtons";
+import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -53,6 +54,57 @@ export const metadata: Metadata = {
   },
 };
 
+// Компонент для скриптов аналитики
+function AnalyticsScripts() {
+  return (
+    <>
+      {/* Яндекс.Метрика */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+            ym(104384730, "init", {
+              clickmap:true,
+              trackLinks:true,
+              accurateTrackBounce:true,
+              webvisor:true
+            });
+          `,
+        }}
+      />
+      {/* Google Analytics */}
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-0KC6R19FS3"
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-0KC6R19FS3');
+          `,
+        }}
+      />
+      {/* Noscript для Яндекс.Метрики */}
+      <noscript>
+        <div>
+          <img 
+            src="https://mc.yandex.ru/watch/104384730" 
+            style={{ position: 'absolute', left: '-9999px' }} 
+            alt="" 
+          />
+        </div>
+      </noscript>
+    </>
+  );
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -61,18 +113,21 @@ export default function RootLayout({
   return (
     <html lang="ru" suppressHydrationWarning>
       <head>
+        <AnalyticsScripts />
         <link rel="preconnect" href="https://images.pexels.com" />
         <link rel="dns-prefetch" href="https://yandex.by" />
       </head>
       <body className={inter.className}>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-grow" role="main">
-            {children}
-          </main>
-          <Footer />
-          <FloatingButtons />
-        </div>
+        <AnalyticsProvider yandexCounterId={104384730}>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow" role="main">
+              {children}
+            </main>
+            <Footer />
+            <FloatingButtons />
+          </div>
+        </AnalyticsProvider>
       </body>
     </html>
   );

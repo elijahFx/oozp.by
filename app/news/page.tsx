@@ -30,15 +30,25 @@ async function NewsList() {
         <Input
           placeholder="Поиск статей..."
           className="pl-4"
+          data-track-event="news_search_focus"
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.reverse().map((article) => (
-          <Card key={article.id} className="flex flex-col h-full hover:shadow-lg transition-shadow">
+          <Card 
+            key={article.id} 
+            className="flex flex-col h-full hover:shadow-lg transition-shadow"
+            data-track-event={`news_article_card_${article.id}`}
+          >
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
-                <Badge variant="secondary">{article.category}</Badge>
+                <Badge 
+                  variant="secondary"
+                  data-track-event={`news_category_${article.category.toLowerCase().replace(/\s+/g, '_')}`}
+                >
+                  {article.category}
+                </Badge>
                 <div className="flex items-center text-sm text-muted-foreground">
                   <CalendarIcon className="mr-1 h-4 w-4" />
                   {article.createdAt}
@@ -52,18 +62,29 @@ async function NewsList() {
             <CardContent className="flex-grow">
               <div className="flex flex-wrap gap-1 mb-4">
                 {article.tags.slice(0, 3).map((tag, tagIndex) => (
-                  <Badge key={tagIndex} variant="outline" className="text-xs">
+                  <Badge 
+                    key={tagIndex} 
+                    variant="outline" 
+                    className="text-xs"
+                    data-track-event={`news_tag_${tag.toLowerCase().replace(/\s+/g, '_')}`}
+                  >
                     <Tag className="mr-1 h-3 w-3" />
                     {tag}
                   </Badge>
                 ))}
               </div>
-              
-              
             </CardContent>
             <CardFooter>
-              <Link href={`/news/${article.url || article.id}`} className="w-full">
-                <Button variant="outline" className="w-full">
+              <Link 
+                href={`/news/${article.url || article.id}`} 
+                className="w-full"
+                data-track-event={`news_read_more_${article.id}`}
+              >
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  data-track-event={`news_read_more_button_${article.id}`}
+                >
                   Читать далее
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -136,10 +157,19 @@ export default function NewsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contacts">
-                <Button>Получить консультацию</Button>
+                <Button 
+                  data-track-event="news_consultation_button"
+                >
+                  Получить консультацию
+                </Button>
               </Link>
               <Link href="/claim-builder">
-                <Button variant="outline">Конструктор претензий</Button>
+                <Button 
+                  variant="outline"
+                  data-track-event="news_builder_button"
+                >
+                  Конструктор претензий
+                </Button>
               </Link>
             </div>
           </div>
