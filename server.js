@@ -7,7 +7,7 @@ const path = require('path');
 require('dotenv').config();
 
 const dev = false;
-const hostname = 'by3020.hb.by'; // Правильный формат
+const hostname = 'localhost'; // Правильный формат - by3020.hb.by
 const port = 3000;
 
 // Функция для поиска свободного порта на УКАЗАННОМ hostname
