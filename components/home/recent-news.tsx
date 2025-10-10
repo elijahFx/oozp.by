@@ -1,8 +1,9 @@
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { CalendarIcon, ChevronRight } from "lucide-react"
+import { CalendarIcon, ChevronRight, Image as ImageIcon } from "lucide-react"
 import { fetchArticles } from "@/lib/api"
+import Image from "next/image"
 
 async function RecentArticlesList() {
   const articles = await fetchArticles();
@@ -13,9 +14,25 @@ async function RecentArticlesList() {
       {recentArticles.reverse().map((article) => (
         <Card 
           key={article.id} 
-          className="hover:shadow-lg transition-shadow duration-300 h-full flex flex-col"
+          className="hover:shadow-lg transition-shadow duration-300 h-full flex flex-col overflow-hidden"
           data-track-event={`news_article_card_${article.id}`}
         >
+          {/* Preview Image */}
+          <div className="relative h-48 w-full bg-muted">
+            {article.imgPath ? (
+              <Image
+                src={article.imgPath}
+                alt={article.title}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full text-muted-foreground">
+                <ImageIcon className="h-12 w-12" />
+              </div>
+            )}
+          </div>
+
           <CardHeader className="flex-1">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
@@ -26,7 +43,9 @@ async function RecentArticlesList() {
                 {article.createdAt}
               </div>
             </div>
-            <CardTitle className="text-xl line-clamp-2 mb-3">{article.title}</CardTitle>
+            <CardTitle className="text-lg leading-tight min-h-[3.5rem] flex items-center mb-3">
+              {article.title}
+            </CardTitle>
             <CardDescription className="line-clamp-3">
               {article.description}
             </CardDescription>

@@ -1,4 +1,11 @@
-import { Phone, MapPin, Mail, MessageCircle } from "lucide-react";
+import {
+  Phone,
+  MapPin,
+  Mail,
+  MessageCircle,
+  FileText,
+  Building,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
@@ -7,7 +14,8 @@ export default function Footer() {
   return (
     <footer className="bg-secondary mt-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Контакты */}
           <div>
             <h3 className="text-lg font-medium mb-4">Контакты</h3>
             <div className="space-y-3">
@@ -49,6 +57,14 @@ export default function Footer() {
                   >
                     Viber
                   </a>
+                  <a
+                    href="https://wa.me/375296062598"
+                    className="hover:text-primary transition-colors block"
+                    aria-label="Написать в WhatsApp"
+                    data-track-event="footer_whatsapp_click"
+                  >
+                    WhatsApp
+                  </a>
                 </div>
               </div>
               <div className="flex items-start space-x-2">
@@ -71,6 +87,7 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Навигация */}
           <div>
             <h3 className="text-lg font-medium mb-4">Навигация</h3>
             <nav role="navigation" aria-label="Навигация в подвале">
@@ -117,6 +134,16 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
+                    href="/claim-builder"
+                    className="hover:text-primary transition-colors"
+                    prefetch={true}
+                    data-track-event="footer_legal_documents_click"
+                  >
+                    Конструктор претензий
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/appeal-procedure"
                     className="hover:text-primary transition-colors"
                     prefetch={true}
@@ -137,61 +164,83 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/privacy-policy"
+                    href="/podpis"
                     className="hover:text-primary transition-colors"
                     prefetch={true}
-                    data-track-event="footer_privacy_policy_click"
+                    data-track-event="footer_news_click"
                   >
-                    Политика обработки персональных данных
+                    Электронная подпись
                   </Link>
                 </li>
               </ul>
             </nav>
           </div>
 
+          {/* О нас */}
           <div>
             <h3 className="text-lg font-medium mb-4">О нас</h3>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mb-4">
               Общественное объединение по защите прав потребителей
               "Автопотребитель" защищает права потребителей во всех сферах
               потребительского рынка. Мы оказываем юридическую помощь и
               консультации по защите прав потребителей.
             </p>
+            <Link
+              href="/privacy-policy"
+              className="text-sm hover:text-primary transition-colors inline-flex items-center gap-1"
+              prefetch={true}
+              data-track-event="footer_privacy_policy_click"
+            >
+              <FileText size={14} />
+              Политика обработки персональных данных
+            </Link>
+          </div>
+
+          {/* Реквизиты */}
+          <div>
+            <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
+              <Building size={18} />
+              Реквизиты
+            </h3>
+            <div className="text-sm text-muted-foreground space-y-3">
+              <div>
+                <p className="font-medium mb-1">
+                  Свидетельство о гос. регистрации:
+                </p>
+                <p>
+                  выд. 28.10.2019 г. Минским городским исполнительным комитетом
+                  № 05/1274
+                </p>
+              </div>
+              <div>
+                <p className="font-medium mb-1">УНП:</p>
+                <p>194906387</p>
+              </div>
+              <div>
+                <p className="font-medium mb-1">Расчетный счет:</p>
+                <p>BY82 UNBS 3015 1510 0000 0000 1933</p>
+              </div>
+              <div>
+                <p className="font-medium mb-1">Банк:</p>
+                <p>
+                  ЗАО «БСБ Банк», г. Минск, пр-т Победителей, д. 23, корп. 4
+                </p>
+              </div>
+              <div>
+                <p className="font-medium mb-1">BIC:</p>
+                <p>UNBSBY2X</p>
+              </div>
+            </div>
           </div>
         </div>
 
+        {/* Копирайт */}
         <div className="border-t mt-8 pt-6">
-          <div className="text-center ">
-            <h3 className="text-lg font-medium mb-4">Реквизиты организации</h3>
-            <div className="text-sm text-muted-foreground space-y-2 max-w-4xl mx-auto">
-              <p>
-                <span className="font-medium">
-                  Свидетельство о гос. регистрации:
-                </span>{" "}
-                выд. 28.10.2019 г. Минским городским исполнительным комитетом №
-                05/1274
-              </p>
-              <p>
-                <span className="font-medium">УНП:</span> 194906387
-              </p>
-              <p>
-                <span className="font-medium">Р/с:</span> BY82 UNBS 3015 1510
-                0000 0000 1933
-              </p>
-              <p>
-                <span className="font-medium">Банк:</span> ЗАО «БСБ Банк», г.
-                Минск, пр-т Победителей, д. 23, корп. 4
-              </p>
-              <p>
-                <span className="font-medium">BIC:</span> UNBSBY2X
-              </p>
-              <div className="text-center text-sm text-muted-foreground">
-                <p>
-                  © 2019-{currentYear} ООЗПП "Автопотребитель". Все права
-                  защищены.
-                </p>
-              </div>
-            </div>
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground">
+              © 2019-{currentYear} Общественное объединение по защите прав
+              потребителей "Автопотребитель". Все права защищены.
+            </p>
           </div>
         </div>
       </div>

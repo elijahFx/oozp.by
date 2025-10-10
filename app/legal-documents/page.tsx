@@ -129,7 +129,7 @@ async function LegalDocumentsList() {
                       {getStatusBadge(document.status || "active")}
                     </div>
                   </div>
-                  <CardTitle className="text-lg line-clamp-2">{document.name}</CardTitle>
+                  <CardTitle className="text-lg">{document.name}</CardTitle>
                   <CardDescription className="line-clamp-2">
                     {document.description}
                   </CardDescription>

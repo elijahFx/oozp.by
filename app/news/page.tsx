@@ -2,11 +2,12 @@ import { Suspense } from "react";
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { CalendarIcon, ChevronRight, Tag } from "lucide-react"
+import { CalendarIcon, ChevronRight, Tag, Image as ImageIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Metadata } from "next"
 import { fetchArticles } from "@/lib/api"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Новости и статьи | Автопотребитель - полезные материалы",
@@ -20,8 +21,24 @@ export const metadata: Metadata = {
   },
 };
 
+// Функция для преобразования даты из формата DD.MM.YYYY в Date объект
+function parseDate(dateString: string): Date {
+  const [day, month, year] = dateString.split('.').map(Number);
+  return new Date(year, month - 1, day); // month - 1 потому что в JS месяцы с 0
+}
+
+// Функция для сортировки статей по дате от старых к новым
+function sortArticlesByDate(articles: any[]): any[] {
+  return articles.sort((a, b) => {
+    const dateA = parseDate(a.createdAt);
+    const dateB = parseDate(b.createdAt);
+    return dateB.getTime() - dateA.getTime(); // от старых к новым
+  });
+}
+
 async function NewsList() {
   const articles = await fetchArticles();
+  const sortedArticles = sortArticlesByDate(articles);
 
   return (
     <div className="space-y-6">
@@ -35,13 +52,29 @@ async function NewsList() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {articles.reverse().map((article) => (
+        {sortedArticles.map((article) => (
           <Card 
             key={article.id} 
-            className="flex flex-col h-full hover:shadow-lg transition-shadow"
+            className="flex flex-col h-full hover:shadow-lg transition-shadow overflow-hidden"
             data-track-event={`news_article_card_${article.id}`}
           >
-            <CardHeader>
+            {/* Preview Image */}
+            <div className="relative h-48 w-full bg-muted">
+              {article.imgPath ? (
+                <Image
+                  src={article.imgPath}
+                  alt={article.title}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full text-muted-foreground">
+                  <ImageIcon className="h-12 w-12" />
+                </div>
+              )}
+            </div>
+
+            <CardHeader className="pb-2">
               <div className="flex items-center justify-between mb-2">
                 <Badge 
                   variant="secondary"
@@ -54,13 +87,15 @@ async function NewsList() {
                   {article.createdAt}
                 </div>
               </div>
-              <CardTitle className="line-clamp-2">{article.title}</CardTitle>
-              <CardDescription className="line-clamp-3">
+              <CardTitle className="text-lg leading-tight min-h-[3.5rem] flex items-center">
+                {article.title}
+              </CardTitle>
+              <CardDescription className="line-clamp-3 mt-2">
                 {article.description}
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex-grow">
-              <div className="flex flex-wrap gap-1 mb-4">
+            <CardContent className="flex-grow pb-2">
+              <div className="flex flex-wrap gap-1">
                 {article.tags.slice(0, 3).map((tag, tagIndex) => (
                   <Badge 
                     key={tagIndex} 
@@ -74,7 +109,7 @@ async function NewsList() {
                 ))}
               </div>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="pt-2">
               <Link 
                 href={`/news/${article.url || article.id}`} 
                 className="w-full"
@@ -94,7 +129,7 @@ async function NewsList() {
         ))}
       </div>
       
-      {articles.length === 0 && (
+      {sortedArticles.length === 0 && (
         <div className="text-center py-12">
           <h3 className="text-lg font-medium mb-2">Статьи не найдены</h3>
           <p className="text-muted-foreground">
@@ -112,14 +147,16 @@ function LoadingSkeleton() {
       <div className="h-10 bg-muted rounded animate-pulse" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {Array.from({ length: 6 }).map((_, i) => (
-          <Card key={i} className="flex flex-col h-full">
+          <Card key={i} className="flex flex-col h-full overflow-hidden">
+            <div className="h-48 bg-muted animate-pulse" />
             <CardHeader>
               <div className="flex items-center justify-between mb-2">
                 <div className="h-6 bg-muted rounded w-20 animate-pulse" />
                 <div className="h-4 bg-muted rounded w-24 animate-pulse" />
               </div>
-              <div className="h-6 bg-muted rounded w-full animate-pulse" />
+              <div className="h-12 bg-muted rounded w-full animate-pulse mb-2" />
               <div className="h-4 bg-muted rounded w-3/4 animate-pulse" />
+              <div className="h-4 bg-muted rounded w-1/2 animate-pulse" />
             </CardHeader>
             <CardContent className="flex-grow">
               <div className="flex gap-2 mb-4">

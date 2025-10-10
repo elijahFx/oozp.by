@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, Clock } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import HeroCarousel from "../carousel/HeroCarousel"
@@ -23,6 +23,15 @@ export default function Hero() {
             
             {/* Телефон горячей линии и адрес */}
             <div className="mt-8 p-6 bg-background/90 backdrop-blur-sm border border-primary/20 rounded-xl shadow-lg">
+              {/* Блок горячей линии */}
+              <div className="flex items-start gap-3 mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <Clock className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-red-800">Горячая линия работает ежедневно с 9.00 до 20.00</p>
+                  <p className="text-sm text-red-600 mt-1">Звоните! Мы всегда готовы помочь</p>
+                </div>
+              </div>
+              
               <p className="text-sm text-muted-foreground mb-2">Телефон горячей линии:</p>
               <a
                 data-track-event="hero_phone_click"

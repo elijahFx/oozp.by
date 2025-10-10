@@ -108,7 +108,7 @@ export default function Header() {
               </a>
               <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                 <MessageCircle size={12} />
-                <span>Telegram/Viber</span>
+                <span>Telegram/Viber/WhatsApp</span>
               </div>
             </div>
             

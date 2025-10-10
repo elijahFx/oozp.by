@@ -18,7 +18,7 @@ interface PageProps {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const article = await fetchArticleById(slug);
   
   if (!article) {
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function NewsArticle({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const article = await fetchArticleById(slug);
   const nextArticleId = await fetchNextArticleId(slug); // Получаем ID следующей статьи
 

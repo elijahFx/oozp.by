@@ -49,14 +49,17 @@ export default function YandexMap() {
         {/* Информационный блок */}
         <div className="bg-white rounded-lg shadow-lg p-6 w-full lg:w-1/3">
           <h2 className="text-xl font-bold mb-2">
-            Общественное объединение по защите прав потребителей "Автопотребитель"
+            Общественное объединение по защите прав потребителей
+            "Автопотребитель"
           </h2>
           <p className="text-gray-600 mb-4">
             Защита прав потребителей во всех сферах потребительского рынка
           </p>
 
           <div className="flex items-center mb-4">
-            <span className={`${workStatus.color} text-sm font-medium px-2.5 py-0.5 rounded`}>
+            <span
+              className={`${workStatus.color} text-sm font-medium px-2.5 py-0.5 rounded`}
+            >
               {workStatus.status}
             </span>
           </div>
@@ -84,7 +87,7 @@ export default function YandexMap() {
               >
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
-              <a 
+              <a
                 href="tel:+375296062598"
                 data-track-event="map_phone_click"
                 className="hover:text-blue-600 transition-colors"
@@ -154,7 +157,7 @@ export default function YandexMap() {
         </div>
 
         {/* Карта */}
-        <div 
+        <div
           className="w-full lg:w-2/3 h-[500px] rounded-lg overflow-hidden shadow-lg"
           data-track-event="map_interaction"
         >
@@ -167,8 +170,13 @@ export default function YandexMap() {
           ></iframe>
           <div className="sr-only">
             <h3>Местоположение офиса</h3>
-            <p>Общественное объединение по защите прав потребителей "Автопотребитель"</p>
-            <p>Адрес: 220004, г. Минск, ул. Амураторская, д. 4, 2 этаж, каб. 209</p>
+            <p>
+              Общественное объединение по защите прав потребителей
+              "Автопотребитель"
+            </p>
+            <p>
+              Адрес: 220004, г. Минск, ул. Амураторская, д. 4, 2 этаж, каб. 209
+            </p>
             <p>Телефон: +375 29 606-25-98</p>
           </div>
         </div>
